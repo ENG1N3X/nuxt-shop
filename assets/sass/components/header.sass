@@ -1,0 +1,62 @@
+.headerLogo
+  display: flex
+  text-decoration: none !important
+
+  &__img
+    width: 72px
+    height: 72px
+    animation: rotate 2s linear
+
+  &__text
+    display: block
+    font-family: Ubuntu-Bold, sans-serif
+    text-transform: uppercase
+    color: $color-000
+    font-size: rem(20)
+    margin-left: 10px
+    transition: .2s
+
+  &:hover
+    .headerLogo
+      &__text
+        color: $color-883
+
+@keyframes rotate
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(180deg)
+  100%
+    transform: rotate(360deg)
+
+.headerNav
+  justify-content: center
+
+  .nav-link
+    font-family: Ubuntu-Medium, sans-serif
+    font-size: rem(15)
+    color: $color-000
+    text-transform: uppercase
+    padding: 0
+    transition: .2s
+
+    &:not(:last-child)
+      margin-right: 25px
+
+    &:hover
+      @extend .active
+
+    &.active
+      color: $color-883
+
+.headerPhone
+  font-family: Ubuntu-Bold, sans-serif
+  font-size: rem(18)
+  color: $color-000
+  text-transform: uppercase
+  padding: 0
+  transition: .2s
+
+  &:hover
+    text-decoration: none
+    color: $color-883
