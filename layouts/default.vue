@@ -1,53 +1,36 @@
-<template>
-  <div>
-    <nuxt />
-  </div>
+<template lang="pug">
+  div
+    //- header-start
+    header.container.mb-80
+      .row.align-items-center
+        .col-3
+          header-logo
+        .col-6
+          header-nav
+        .col-3.text-right
+          a.headerPhone(href='tel:88005553535') 8-800-555-35-35
+    //- header-end
+
+    //- nuxt-start
+    nuxt
+    //- nuxt-end
+
+    //- footer-start
+    footer.container
+      .row
+        .col-12
+          span.color-000.d-block.text-center © 2020
+    //- footer-end
 </template>
 
-<style>
-html {
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+import HeaderLogo from "~/components/header/Logo.vue";
+import HeaderNav from "~/components/header/Nav.vue";
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>
+export default {
+  components: {
+    HeaderLogo,
+    HeaderNav
+  }
+};
+</script>
