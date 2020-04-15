@@ -1,0 +1,6 @@
+@import "../vars"
+	
+@function em($pixels, $context: $font-size)
+  @return #{$pixels/$context}em
+@function rem($pixels, $context: $font-size)
+  @return #{$pixels/$context}rem
