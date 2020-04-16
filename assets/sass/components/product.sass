@@ -1,6 +1,15 @@
-.productPrice, .productCount
-    font-family: Ubuntu-Medium, sans-serif
-    font-size: rem(30)
+.product
+    &Img
+        transition: .2s
+        transform: scale(1)
 
-.productDesc
-    font-size: rem(17)
+        &:hover
+            cursor: pointer
+            transform: scale(1.2)
+
+    &Price, &Count
+        font-family: Ubuntu-Medium, sans-serif
+        font-size: rem(30)
+
+    &Desc
+        font-size: rem(17)

@@ -8,11 +8,8 @@
    text-decoration: none
    transform: scale(0.8)
 
-   .choice
-     &Btn
-       color: $color-fff !important
-       border-color: $color-000
-       background: $color-000
+   .choiceBtn
+      @extend .active
 
   &Img
     width: 80%
@@ -22,13 +19,5 @@
     color: $color-000
     font-size: rem(18)
     margin:
-      top: 10px
+      top: 20px
       bottom: 15px
-
-  &Btn
-    padding: 8px 12px
-    color: $color-883 !important
-    font-size: rem(15)
-    border: 1px solid $color-883
-    border-radius: 10px
-    transition: .2s
