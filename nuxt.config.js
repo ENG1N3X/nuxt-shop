@@ -38,6 +38,8 @@ module.exports = {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    // Doc: https://axios.nuxtjs.org/
+    '@nuxtjs/axios',
   ],
   /*
    ** Build configuration
