@@ -9,8 +9,11 @@
         <div class="col-6">
           <header-nav></header-nav>
         </div>
-        <div class="col-3 text-right">
+        <div class="col-2 text-right">
           <a class="headerPhone" href="tel:88005553535">8-800-555-35-35</a>
+        </div>
+        <div class="col-1">
+          <nuxt-link to="/basket"><i class="fa fa-shopping-basket headerBasket" aria-hidden="true"></i></nuxt-link>
         </div>
       </div>
     </header>
