@@ -5,7 +5,6 @@
   &__img
     width: 72px
     height: 72px
-    animation: rotate 2s linear
 
   &__text
     display: block
@@ -20,14 +19,6 @@
     .headerLogo
       &__text
         color: $color-883
-
-@keyframes rotate
-  0%
-    transform: rotate(0deg)
-  50%
-    transform: rotate(180deg)
-  100%
-    transform: rotate(360deg)
 
 .headerNav
   justify-content: center
@@ -60,3 +51,11 @@
   &:hover
     text-decoration: none
     color: $color-883
+
+.headerBasket
+  font-size: rem(30) !important
+  color: $color-883
+  transition: .2s
+
+  &:hover
+    color: $color-000
