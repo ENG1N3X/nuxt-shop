@@ -1,9 +1,14 @@
 const Product = require('../schema/product.schema.js')
 
-const create = Product.create({ title: 'Товар #2', description: 'Описание', count: 500, price: 500 }, function (error, product) {
-  if (error) return console.log(error)
-  console.log('Create:\n' + product)
-})
+const create = async function (title, description, count, price) {
+  await Product.create({ title: title, description: description, count: count, price: price })
+    .then(function (result) {
+      console.log('Create:\n' + result)
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+}
 
 const update = Product.findOneAndUpdate({}, function (error, product) {
   // update product
@@ -17,9 +22,15 @@ const get = Product.findById({}, function (error, product) {
   // get product
 })
 
-const getAll = Product.find({}, function (error, product) {
-  // getAll products
-})
+const getAll = async function () {
+  await Product.find({})
+    .then(function (result) {
+      console.log(result)
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+}
 
 module.exports = {
   create,
