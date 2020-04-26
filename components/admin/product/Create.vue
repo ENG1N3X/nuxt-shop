@@ -3,7 +3,8 @@
     <div class="col-6 d-flex align-items-end">
       <div class="form-group">
         <label for="picture">Добавить фото</label>
-        <input type="file" class="form-control-file" id="picture" />
+        <input type="file" class="form-control-file" id="picture" @change="OnFileSelected" />
+        <button class="btn submitBtn" @click="OnFileUpload">Загрузить</button>
       </div>
     </div>
     <div class="col-6">
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+// import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -40,6 +43,7 @@ export default {
         count: NaN,
         price: NaN,
       },
+      selectedFile: null,
     }
   },
   methods: {
@@ -57,6 +61,16 @@ export default {
       this.form.description = ''
       this.form.count = NaN
       this.form.price = NaN
+    },
+    OnFileSelected(event) {
+      this.selectedFile = event.target.files[0]
+    },
+    async OnFileUpload() {
+      const fd = new FormData()
+      fd.append('image', this.selectedFile, this.selectedFile.name)
+      await this.$axios.$post('/api/product/create', fd).then((res) => {
+        console.log(res)
+      })
     },
   },
 }
