@@ -41,6 +41,10 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/
     '@nuxtjs/axios',
   ],
+  // используем BASE_URL для запросов (которую я добавил в хероку), если ее нет, то тогда стучимся на локалхост
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+  },
   /*
    ** Build configuration
    */
