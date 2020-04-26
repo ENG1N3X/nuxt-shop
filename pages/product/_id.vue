@@ -9,7 +9,7 @@
 
     <div class="row align-items-center product">
       <div class="col-10">
-        <h2 class="productTitle">Товар #1</h2>
+        <h2 class="productTitle">Товар</h2>
       </div>
       <div class="col-2">
         <button class="btn buyBtn">В корзину</button>
@@ -42,8 +42,14 @@
 
 <script>
 export default {
-  data() {
-    return {}
+  async asyncData({ params, $axios }) {
+    try {
+      console.log(params._id)
+      const product = await $axios.get('/api/product/get/' + params._id)
+      return { product: product.data }
+    } catch (e) {
+      console.error('e', e)
+    }
   },
 }
 </script>
