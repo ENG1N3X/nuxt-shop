@@ -8,7 +8,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-4 mb-40" v-for="(product, idx) in products" :key="idx">
-        <nuxt-link to="/product/${product._id}" class="choice">
+        <nuxt-link :to="`/product/${product._id}`" class="choice">
           <img class="img-fluid choiceImg" src="~assets/img/products/product.png" :alt="product.title" />
           <h4 class="choiceTitle">{{ product.title }}</h4>
           <button class="btn choiceBtn">Подробнее</button>
