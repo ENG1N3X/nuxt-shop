@@ -68,9 +68,10 @@ export default {
     async OnFileUpload() {
       const fd = new FormData()
       fd.append('image', this.selectedFile, this.selectedFile.name)
-      await this.$axios.$post('/api/product/create', fd).then((res) => {
-        console.log(res)
-      })
+      console.log(fd)
+      // await this.$axios.$post('/api/product/create', fd).then((res) => {
+      //   console.log(res)
+      // })
     },
   },
 }
