@@ -42,6 +42,13 @@ module.exports = {
     '@nuxtjs/axios',
   ],
   /*
+   ** Axios module configuration
+   ** See https://axios.nuxtjs.org/options
+   */
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  },
+  /*
    ** Build configuration
    */
   build: {
