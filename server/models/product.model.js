@@ -21,7 +21,6 @@ const productSchema = new Schema({
     default: 0,
   },
   image: {
-    data: Buffer,
     type: String,
   },
   isActive: {

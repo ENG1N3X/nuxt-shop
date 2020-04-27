@@ -1,9 +1,9 @@
 const Product = require('../models/product.model')
 
-// Создание, в дальнейшем ты будешь тут ловить картинку, если она будет
 module.exports.create = async (req, res) => {
-  // TODO поиграйся тут
-  // console.log('req.body', req.body)
+  console.log('req.body', req.body)
+  // console.log('req', req)
+  console.log('res.body', res.body)
   try {
     await Product.create(req.body)
     res.status(201).json({ message: 'Элемент добавлен!' })
@@ -12,7 +12,6 @@ module.exports.create = async (req, res) => {
   }
 }
 
-// Обновление, тут тоже будешь ловить картинку, если она будет
 module.exports.update = async (req, res) => {
   const $set = req.body
   try {
@@ -23,7 +22,6 @@ module.exports.update = async (req, res) => {
   }
 }
 
-// Удаление
 module.exports.remove = async (req, res) => {
   try {
     await Product.deleteOne({ _id: req.params.id })
@@ -33,7 +31,6 @@ module.exports.remove = async (req, res) => {
   }
 }
 
-// Вернуть по id
 module.exports.getById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
@@ -43,7 +40,6 @@ module.exports.getById = async (req, res) => {
   }
 }
 
-// Вернуть весь список
 module.exports.getAll = async (req, res) => {
   try {
     const products = await Product.find()

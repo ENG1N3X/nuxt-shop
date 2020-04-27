@@ -3,8 +3,7 @@
     <div class="col-6">
       <div class="form-row col-12">
         <div class="form-group d-flex align-items-center">
-          <input type="file" class="form-control-file" @change="OnFileSelected" required />
-          <!-- <button class="btn submitBtn" @click="OnFileUpload">Загрузить</button> -->
+          <input type="file" class="form-control-file" @change="OnFileSelected" />
         </div>
       </div>
       <div class="form-row" v-if="selectedImageURL">
@@ -55,8 +54,17 @@ export default {
   methods: {
     async create() {
       try {
-        this.OnFileUpload()
-        await this.$axios.$post('/api/product/create', this.form).then((res) => console.log(res))
+        const fd = new FormData()
+        fd.append('title', this.form.title)
+        fd.append('description', this.form.description)
+        fd.append('count', this.form.count)
+        fd.append('price', this.form.price)
+        fd.append('image', this.form.image)
+
+        console.log(fd)
+
+        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+        await this.$axios.$post('/api/product/create', fd, config)
         this.$emit('created')
         this.clearForm()
       } catch (e) {
@@ -66,24 +74,12 @@ export default {
     clearForm() {
       this.form.title = this.form.description = ''
       this.form.count = this.form.price = this.form.image = this.selectedImage = this.selectedImageURL = null
-      console.log('Reset vars')
     },
     OnFileSelected(event) {
       this.selectedImage = event.target.files[0]
       if (this.selectedImage) {
-        console.log(this.selectedImage)
         this.selectedImageURL = URL.createObjectURL(this.selectedImage)
-        console.log(this.selectedImageURL)
       }
-    },
-    OnFileUpload() {
-      this.form.image = new FormData()
-      this.form.image.append('image', this.selectedImage, this.selectedImage.name)
-      console.log(this.form.image)
-      // console.log(fd)
-      // await this.$axios.$post('/api/product/create', fd).then((res) => {
-      //   console.log(res)
-      // })
     },
   },
 }
