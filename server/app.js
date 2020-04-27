@@ -11,7 +11,7 @@ const app = express()
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(function (result) {
     switch (result.connection.readyState) {

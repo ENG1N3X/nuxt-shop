@@ -5,25 +5,29 @@ const productSchema = new Schema({
     type: String,
     default: '',
     required: true,
-    index: true
+    index: true,
   },
   description: {
     type: String,
-    default: ''
+    default: '',
   },
   count: {
     type: Number,
-    default: 0
+    default: 0,
   },
   price: {
     type: Number,
     index: true,
-    default: 0
+    default: 0,
+  },
+  image: {
+    data: Buffer,
+    type: String,
   },
   isActive: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 module.exports = new model('products', productSchema)

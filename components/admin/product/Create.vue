@@ -1,10 +1,16 @@
 <template>
   <form class="form-row mb-50" @submit.prevent="create">
-    <div class="col-6 d-flex align-items-end">
-      <div class="form-group">
-        <label for="picture">Добавить фото</label>
-        <input type="file" class="form-control-file" id="picture" @change="OnFileSelected" />
-        <button class="btn submitBtn" @click="OnFileUpload">Загрузить</button>
+    <div class="col-6">
+      <div class="form-row col-12">
+        <div class="form-group d-flex align-items-center">
+          <input type="file" class="form-control-file" @change="OnFileSelected" required />
+          <!-- <button class="btn submitBtn" @click="OnFileUpload">Загрузить</button> -->
+        </div>
+      </div>
+      <div class="form-row" v-if="selectedImageURL">
+        <div class="form-group col-12">
+          <img :src="selectedImageURL" alt="product" />
+        </div>
       </div>
     </div>
     <div class="col-6">
@@ -38,16 +44,19 @@ export default {
       form: {
         title: '',
         description: '',
-        count: NaN,
-        price: NaN,
+        count: null,
+        price: null,
+        image: null,
       },
-      selectedFile: null,
+      selectedImage: null,
+      selectedImageURL: null,
     }
   },
   methods: {
     async create() {
       try {
-        await this.$axios.$post('/api/product/create', this.form)
+        this.OnFileUpload()
+        await this.$axios.$post('/api/product/create', this.form).then((res) => console.log(res))
         this.$emit('created')
         this.clearForm()
       } catch (e) {
@@ -55,18 +64,23 @@ export default {
       }
     },
     clearForm() {
-      this.form.title = ''
-      this.form.description = ''
-      this.form.count = NaN
-      this.form.price = NaN
+      this.form.title = this.form.description = ''
+      this.form.count = this.form.price = this.form.image = this.selectedImage = this.selectedImageURL = null
+      console.log('Reset vars')
     },
     OnFileSelected(event) {
-      this.selectedFile = event.target.files[0]
+      this.selectedImage = event.target.files[0]
+      if (this.selectedImage) {
+        console.log(this.selectedImage)
+        this.selectedImageURL = URL.createObjectURL(this.selectedImage)
+        console.log(this.selectedImageURL)
+      }
     },
-    async OnFileUpload() {
-      const fd = new FormData()
-      fd.append('image', this.selectedFile, this.selectedFile.name)
-      console.log(fd)
+    OnFileUpload() {
+      this.form.image = new FormData()
+      this.form.image.append('image', this.selectedImage, this.selectedImage.name)
+      console.log(this.form.image)
+      // console.log(fd)
       // await this.$axios.$post('/api/product/create', fd).then((res) => {
       //   console.log(res)
       // })
@@ -74,3 +88,5 @@ export default {
   },
 }
 </script>
+
+<style></style>
