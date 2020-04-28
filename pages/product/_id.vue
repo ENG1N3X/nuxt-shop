@@ -14,7 +14,7 @@
         <button class="btn buyBtn">В корзину</button>
       </div>
       <div class="col-6 text-center">
-        <img class="img-fluid productImg" src="~assets/img/products/product.png" alt="product" />
+        <img class="img-fluid" :src="`../../${product.image}`" :alt="product.title" />
       </div>
       <div class="col-6">
         <div class="row">
