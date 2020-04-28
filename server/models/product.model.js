@@ -3,22 +3,21 @@ const { model, Schema } = require('mongoose')
 const productSchema = new Schema({
   title: {
     type: String,
-    default: '',
     required: true,
     index: true,
   },
   description: {
     type: String,
-    default: '',
+    required: true,
   },
   count: {
     type: Number,
-    default: 0,
+    required: true,
   },
   price: {
     type: Number,
     index: true,
-    default: 0,
+    required: true,
   },
   image: {
     type: String,

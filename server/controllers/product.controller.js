@@ -1,11 +1,28 @@
 const Product = require('../models/product.model')
+const path = require('path')
+const fs = require('fs')
 
 module.exports.create = async (req, res) => {
-  console.log('req.body', req.body)
-  // console.log('req', req)
-  console.log('res.body', res.body)
   try {
-    await Product.create(req.body)
+    const date = new Date()
+    const dateToday = date.toLocaleDateString('ru').toString() + '-' + date.getHours().toString() + '-' + date.getMinutes().toString() + '-' + date.getSeconds().toString() + '-'
+
+    const fileName = dateToday + req.files.image.name
+    const fileImage = req.files.image
+    const savePath = path.resolve(__dirname, '../../static/products/')
+
+    await fs.writeFileSync(`${savePath}/${fileName}`, fileImage, (error) => {
+      if (!error) {
+        console.error('Не удалось загрузить картинку', error)
+        fileName = fileImage = null
+      }
+    })
+
+    const fd = req.body
+    fd.image = 'products/' + fileName
+
+    await Product.create(fd)
+
     res.status(201).json({ message: 'Элемент добавлен!' })
   } catch (error) {
     res.status(500).json({ message: 'Не удалось создать элемент!', error })

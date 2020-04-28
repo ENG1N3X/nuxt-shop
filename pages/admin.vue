@@ -30,15 +30,15 @@
       </div>
       <div :class="['col-12 editProduct__block', product.isActive ? 'active' : '']">
         <form class="form-row mt-20">
-          <div class="form-group col-6">
+          <div class="form-group col-8">
             <label for="price">Изменить название</label>
             <input type="text" v-model="product.title" class="form-control" id="title" />
           </div>
-          <div class="form-group col-3">
+          <div class="form-group col-2">
             <label for="price">Изменить цену</label>
             <input type="number" v-model="product.price" class="form-control" id="price" />
           </div>
-          <div class="form-group col-3">
+          <div class="form-group col-2">
             <label for="count">Изменить количество</label>
             <input type="number" v-model="product.count" class="form-control" id="count" />
           </div>
@@ -81,7 +81,6 @@ export default {
     async edit(item) {
       try {
         await this.$axios.$put('/api/product/update/' + item._id, item)
-        console.log('обновленно')
         await this.getAll()
       } catch (e) {
         console.error('не удалось обновить товар', e)
@@ -90,7 +89,6 @@ export default {
     async remove(itemId) {
       try {
         await this.$axios.$delete('/api/product/remove/' + itemId)
-        console.log('удалено')
         await this.getAll()
       } catch (e) {
         console.error('не удалось удалить товар', e)
