@@ -47,7 +47,6 @@ export default {
         price: null,
         image: null,
       },
-      selectedImage: null,
       selectedImageURL: null,
     }
   },
@@ -59,7 +58,10 @@ export default {
         fd.append('description', this.form.description)
         fd.append('count', this.form.count)
         fd.append('price', this.form.price)
-        fd.append('image', this.form.image)
+        fd.append('image', this.form.image, this.form.image.name)
+
+        console.log(this.form.image)
+        console.log(this.form.image.name)
 
         console.log(fd)
 
@@ -73,12 +75,12 @@ export default {
     },
     clearForm() {
       this.form.title = this.form.description = ''
-      this.form.count = this.form.price = this.form.image = this.selectedImage = this.selectedImageURL = null
+      this.form.count = this.form.price = this.form.image = this.selectedImageURL = null
     },
     OnFileSelected(event) {
-      this.selectedImage = event.target.files[0]
-      if (this.selectedImage) {
-        this.selectedImageURL = URL.createObjectURL(this.selectedImage)
+      this.form.image = event.target.files[0]
+      if (this.form.image) {
+        this.selectedImageURL = URL.createObjectURL(this.form.image)
       }
     },
   },
