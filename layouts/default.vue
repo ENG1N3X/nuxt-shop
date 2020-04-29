@@ -4,13 +4,13 @@
     <header class="container mb-80">
       <div class="row align-items-center">
         <div class="col-3">
-          <header-logo></header-logo>
+          <app-header-logo></app-header-logo>
         </div>
         <div class="col-6">
-          <header-nav></header-nav>
+          <app-header-nav></app-header-nav>
         </div>
         <div class="col-2 text-right">
-          <a class="headerPhone" href="tel:88005553535">8-800-555-35-35</a>
+          <a class="headerPhone" :href="`tel:${number}`">{{ numberText }}</a>
         </div>
         <div class="col-1">
           <nuxt-link to="/basket"><i class="fa fa-shopping-basket headerBasket" aria-hidden="true"></i></nuxt-link>
@@ -25,7 +25,7 @@
     <footer class="container mt-80">
       <div class="row">
         <div class="col-12">
-          <span class="d-block text-center">© 2020 </span>
+          <span class="d-block text-center">{{ copyrightText }}</span>
         </div>
       </div>
     </footer>
@@ -34,13 +34,20 @@
 </template>
 
 <script>
-import HeaderLogo from '~/components/header/Logo.vue'
-import HeaderNav from '~/components/header/Nav.vue'
+import AppHeaderLogo from '~/components/header/Logo.vue'
+import AppHeaderNav from '~/components/header/Nav.vue'
 
 export default {
+  data() {
+    return {
+      copyrightText: '© 2020',
+      number: 88005553535,
+      numberText: '8-800-555-35-35',
+    }
+  },
   components: {
-    HeaderLogo,
-    HeaderNav,
+    AppHeaderLogo,
+    AppHeaderNav,
   },
 }
 </script>
