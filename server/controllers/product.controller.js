@@ -6,12 +6,12 @@ const moment = require('moment')
 module.exports.create = async (req, res) => {
   try {
     const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
-    const fileImage = req.files.image.data
+    const fileImageData = req.files.image.data
     const savePath = path.resolve(__dirname, '../../static/products/')
 
-    await fs.writeFileSync(`${savePath}/${fileName}`, fileImage, (error) => {
+    await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
       if (!error) {
-        console.error('Не удалось загрузить картинку', error)
+        console.error('Не удалось загрузить картинку!', error)
       }
     })
 
@@ -26,9 +26,21 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
-  const $set = req.body
   try {
-    await Product.updateOne({ _id: req.params.id }, { $set }, { new: true })
+    const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
+    const fileImageData = req.files.image.data
+    const savePath = path.resolve(__dirname, '../../static/products/')
+
+    await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
+      if (!error) {
+        console.error('Не удалось загрузить картинку!', error)
+      }
+    })
+
+    const fd = req.body
+    fd.image = 'products/' + fileName
+
+    await Product.updateOne({ _id: req.params.id }, fd, { new: true })
     res.json({ message: 'Данные обновленны!' })
   } catch (error) {
     res.status(500).json({ message: 'Не удалось обновить данные!', error })

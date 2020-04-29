@@ -15,6 +15,7 @@
         </nuxt-link>
       </div>
     </div>
+    <p v-if="products == 0" class="text-center choiceStatus">В данный момент нет товаров в магазине</p>
   </section>
   <!-- choice-end -->
 </template>
