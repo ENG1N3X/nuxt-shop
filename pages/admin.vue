@@ -134,10 +134,6 @@ export default {
       this.selectedNewImage = event.target.files[0]
       if (this.selectedNewImage) {
         this.selectedImageURL = URL.createObjectURL(this.selectedNewImage)
-
-        console.log(this.selectedNewImage)
-        console.log(this.selectedNewImage.name)
-        console.log(this.selectedImageURL)
       }
     },
   },

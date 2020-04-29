@@ -5,20 +5,24 @@ const moment = require('moment')
 
 module.exports.create = async (req, res) => {
   try {
-    const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
-    const fileImageData = req.files.image.data
-    const savePath = path.resolve(__dirname, '../../static/products/')
-
-    await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
-      if (!error) {
-        console.error('Не удалось загрузить картинку!', error)
-      }
-    })
-
     const fd = req.body
-    fd.image = 'products/' + fileName
-    await Product.create(fd)
 
+    if (req.files.image) {
+      const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
+      const fileImageData = req.files.image.data
+      const savePath = path.resolve(__dirname, '../../static/products/')
+
+      await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
+        if (!error) {
+          console.error('Не удалось загрузить картинку!', error)
+        }
+      })
+      fd.image = 'products/' + fileName
+    } else {
+      fd.image = 'products/fake-product.png'
+    }
+
+    await Product.create(fd)
     res.status(201).json({ message: 'Элемент добавлен!' })
   } catch (error) {
     res.status(500).json({ message: 'Не удалось создать элемент!', error })
@@ -27,18 +31,20 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   try {
-    const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
-    const fileImageData = req.files.image.data
-    const savePath = path.resolve(__dirname, '../../static/products/')
-
-    await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
-      if (!error) {
-        console.error('Не удалось загрузить картинку!', error)
-      }
-    })
-
     const fd = req.body
-    fd.image = 'products/' + fileName
+
+    if (req.files.image) {
+      const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
+      const fileImageData = req.files.image.data
+      const savePath = path.resolve(__dirname, '../../static/products/')
+
+      await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
+        if (!error) {
+          console.error('Не удалось загрузить картинку!', error)
+        }
+      })
+      fd.image = 'products/' + fileName
+    }
 
     await Product.updateOne({ _id: req.params.id }, fd, { new: true })
     res.json({ message: 'Данные обновленны!' })

@@ -53,9 +53,31 @@
     color: $color-883
 
 .headerBasket
-  font-size: rem(30) !important
-  color: $color-883
-  transition: .2s
+  position: relative
 
-  &:hover
-    color: $color-000
+  i  
+    font-size: rem(30) !important
+    color: $color-883
+    transition: .2s
+
+    &:hover
+      color: $color-000
+
+  span
+    position: absolute
+    top: -35%
+    left: 90%
+    transform: translate(-50%, -50%)
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    width: 22px
+    height: 22px
+    background: $color-545
+    border-radius: 50%
+    font-family: Ubuntu-Bold, sans-serif
+    color: $color-fff
+    font-size: rem(12)
+    line-height: 1

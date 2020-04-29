@@ -12,8 +12,11 @@
         <div class="col-2 text-right">
           <a class="headerPhone" :href="`tel:${number}`">{{ numberText }}</a>
         </div>
-        <div class="col-1">
-          <nuxt-link to="/basket"><i class="fa fa-shopping-basket headerBasket" aria-hidden="true"></i></nuxt-link>
+        <div class="col-1 text-right">
+          <nuxt-link to="/basket" class="headerBasket">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+            <span v-if="productsCount != 0">{{ productsCount }}</span>
+          </nuxt-link>
         </div>
       </div>
     </header>
@@ -48,6 +51,12 @@ export default {
   components: {
     AppHeaderLogo,
     AppHeaderNav,
+  },
+  computed: {
+    // Метод получения из store/product.js кол-ва элементов в корзине
+    productsCount() {
+      return this.$store.state.product.list.length
+    },
   },
 }
 </script>
