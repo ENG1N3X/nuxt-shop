@@ -14,13 +14,13 @@
         </h3>
       </div>
       <div class="col-2">
-        <button class="btn editBtn" @click="clearBasket">Очистить</button>
+        <button class="btn btn-yellow-white w-100" @click="clearBasket">Очистить</button>
       </div>
       <div class="col-2">
-        <button class="btn buyBtn">Оплатить</button>
+        <button class="btn btn-green-white w-100">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
-        <div class="row mb-30 product" v-for="(product, idx) in products" :key="idx">
+        <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in products" :key="idx">
           <div class="col-6">
             <img :src="product.image" :alt="product.title" />
           </div>

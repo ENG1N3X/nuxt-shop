@@ -11,7 +11,7 @@
         <nuxt-link :to="`/product/${product._id}`" class="choice">
           <img class="img-fluid" :src="product.image" :alt="product.title" />
           <h4 class="choiceTitle">{{ product.title }}</h4>
-          <button class="btn choiceBtn">Подробнее</button>
+          <button class="btn btn-green-black">Подробнее</button>
         </nuxt-link>
       </div>
     </div>

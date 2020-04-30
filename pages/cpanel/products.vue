@@ -26,10 +26,10 @@
       <div class="col-6">
         <div class="row">
           <div class="col-6">
-            <button class="btn editBtn" @click="product.isActive = !product.isActive">Редактировать</button>
+            <button class="btn btn-yellow-white w-100" @click="product.isActive = !product.isActive">Редактировать</button>
           </div>
           <div class="col-6">
-            <button class="btn removeBtn" type="submit" @click.prevent="remove(product._id)">Удалить</button>
+            <button class="btn btn-red-white w-100" type="submit" @click.prevent="remove(product._id)">Удалить</button>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
           <div class="form-group col-7">
             <div class="form-row">
               <div class="form-group col-12">
-                <label for="price">Изменить название</label>
+                <label for="title">Изменить название</label>
                 <input type="text" v-model="product.title" class="form-control" id="title" />
               </div>
               <div class="form-group col-6">
@@ -60,11 +60,11 @@
             </div>
             <div class="form-row">
               <div class="form-group col-6">
-                <input type="file" name="file" id="file2" class="form-control-file inputFile" @change="onFileSelected" />
+                <input type="file" name="file" id="file2" class="form-control-file input-blue-white" @change="onFileSelected" />
                 <label for="file2">Выберите картинку</label>
               </div>
-              <div class="form-group col-6">
-                <button type="submit" @click.prevent="edit(product)" @click="product.isActive = false" class="btn submitBtn">Изменить</button>
+              <div class="form-group offset-2 col-4">
+                <button type="submit" @click.prevent="edit(product)" @click="product.isActive = false" class="btn btn-green-white w-100">Обновить</button>
               </div>
             </div>
           </div>
@@ -77,9 +77,10 @@
 </template>
 
 <script>
-import AppCreateProduct from '~/components/admin/product/Create'
+import AppCreateProduct from '~/components/cpanel/product/Create'
 
 export default {
+  layout: 'cpanel/cpanel',
   components: {
     AppCreateProduct,
   },

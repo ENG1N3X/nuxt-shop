@@ -24,11 +24,11 @@
       </div>
       <div class="form-row">
         <div class="form-group col-6">
-          <input type="file" name="file" id="file" class="form-control-file inputFile" @change="onFileSelected" />
+          <input type="file" name="file" id="file" class="form-control-file input-blue-white" @change="onFileSelected" />
           <label for="file">Выберите картинку</label>
         </div>
-        <div class="form-group col-6">
-          <button type="submit" class="btn submitBtn">Добавить</button>
+        <div class="form-group offset-2 col-4">
+          <button type="submit" class="btn btn-green-white w-100">Добавить</button>
         </div>
       </div>
     </div>

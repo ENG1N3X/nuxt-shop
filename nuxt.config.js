@@ -21,6 +21,13 @@ module.exports = {
    */
   loading: { color: '#fff' },
   /*
+   ** Customize router
+   */
+  router: {
+    linkActiveClass: 'is-active',
+    linkExactActiveClass: 'is-active',
+  },
+  /*
    ** Global CSS
    */
   css: ['~assets/sass/styles.sass', 'font-awesome/css/font-awesome.min.css'],
