@@ -65,7 +65,9 @@ export default {
           fd.append('image', this.form.image, this.form.image.name)
         }
 
-        await this.$axios.$post('/api/product/create', fd)
+        await this.$store.dispatch('products/addProduct', fd)
+
+        // await this.$axios.$post('/api/product/create', fd)
         this.$emit('created')
         this.clearForm()
       } catch (e) {

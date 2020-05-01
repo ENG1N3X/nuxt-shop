@@ -23,6 +23,16 @@ export const actions = {
       console.error('[ХРАНИЛИЩЕ] Ошибка обновления', error)
     }
   },
+
+  // Добавление продукта
+  async addProduct({ dispatch }, product) {
+    try {
+      await this.$axios.$post('/api/product/create', product)
+      await dispatch('getAllProducts')
+    } catch (error) {
+      console.error('[ХРАНИЛИЩЕ] Ошибка добавления', error)
+    }
+  },
 }
 
 export const mutations = {

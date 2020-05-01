@@ -94,11 +94,13 @@ export default {
   },
   methods: {
     async getAll() {
-      try {
-        this.products = await this.$axios.$get('/api/product/getall')
-      } catch (e) {
-        console.error('не удалось получить список товаров', e)
-      }
+      // try {
+      //   this.products = await this.$axios.$get('/api/product/getall')
+      // } catch (e) {
+      //   console.error('не удалось получить список товаров', e)
+      // }
+      this.products = await this.$store.getters['products/productsList']
+      console.log('getAll()', this.products)
     },
     async edit(item) {
       try {
@@ -113,7 +115,8 @@ export default {
           fd.append('image', this.selectedNewImage, this.selectedNewImage.name)
         }
 
-        await this.$axios.$put('/api/product/update/' + item._id, fd)
+        await this.$store.dispatch('products/updateProduct', fd)
+        // await this.$axios.$put('/api/product/update/' + item._id, fd)
         await this.getAll()
 
         this.selectedNewImage = this.selectedImageURL = null
@@ -135,6 +138,17 @@ export default {
         this.selectedImageURL = URL.createObjectURL(this.selectedNewImage)
       }
     },
+  },
+  // Обновляем хранилище
+  async fetch({ store }) {
+    try {
+      if (store.getters['products/productsList'].length === 0) {
+        await store.dispatch('products/getAllProducts')
+        console.log('[PRODUCTS.VUE] Вызван fetch получения продуктов')
+      }
+    } catch (error) {
+      console.error('[PRODUCTS.VUE] Ошибка получения', error)
+    }
   },
 }
 </script>
