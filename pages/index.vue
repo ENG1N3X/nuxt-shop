@@ -10,7 +10,8 @@
       <div class="col-4 mb-40" v-for="(product, idx) in products" :key="idx">
         <nuxt-link :to="`/product/${product._id}`" class="choice">
           <img class="img-fluid" :src="product.image" :alt="product.title" />
-          <h4 class="choiceTitle">{{ product.title }}</h4>
+          <h2 class="choiceTitle">{{ product.title }}</h2>
+          <h5 class="color-545">{{ product.price }} руб.</h5>
           <button class="btn btn-green-black">Подробнее</button>
         </nuxt-link>
       </div>

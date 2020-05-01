@@ -11,7 +11,7 @@
         <button class="btn btn-green-black w-100" @click="addToBasket(product)">В корзину</button>
       </div>
     </div>
-    <div class="row align-items-center pt-2 pb-2 bg-6f6 rounded">
+    <div class="row align-items-center">
       <div class="col-6">
         <img class="img-fluid" :src="`../../${product.image}`" :alt="product.title" />
       </div>

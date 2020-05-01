@@ -6,11 +6,11 @@
         <h2 class="mainTitle">Корзина</h2>
       </div>
     </div>
-    <div v-if="products != 0" class="row mb-30">
+    <div v-if="basketComputed != 0" class="row mb-30">
       <div class="col-8">
         <h3 class="d-flex">
           Итого:
-          <div class="pl-10 color-545">{{ sumProductPrice() }} рублей</div>
+          <div class="pl-10 color-545">{{ sumProductPrice }} рублей</div>
         </h3>
       </div>
       <div class="col-2">
@@ -20,7 +20,7 @@
         <button class="btn btn-green-white w-100">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
-        <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in products" :key="idx">
+        <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in basketComputed" :key="idx">
           <div class="col-6">
             <img :src="product.image" :alt="product.title" />
           </div>
@@ -64,32 +64,24 @@
 
 <script>
 export default {
-  data() {
-    return {
-      products: [],
-    }
-  },
-  mounted() {
-    this.getProducts()
-  },
-  methods: {
-    getProducts() {
-      // Получаем продукты из store/basket.js
-      this.products = this.$store.state.basket.basketProducts
-      return this.products
+  computed: {
+    // Получаем продукты из store/basket.js
+    basketComputed() {
+      return this.$store.getters['basket/basketProducts']
     },
     sumProductPrice() {
       // Подсчитываем общую цену за все продукты
       let productPrice = 0
-      this.products.forEach((product) => {
+      this.basketComputed.forEach((product) => {
         productPrice += parseInt(product.price)
       })
       return productPrice
     },
-    // Метод store/basket.js от продуктов
+  },
+  methods: {
+    // Метод очистки store/basket.js от продуктов
     clearBasket() {
       this.$store.commit('basket/clear')
-      this.getProducts()
     },
   },
 }

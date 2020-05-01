@@ -11,16 +11,17 @@ export const actions = {
       const products = await this.$axios.$get('/api/product/getall')
       commit('SET_PRODUCTS_LIST', products)
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка получения', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка получения продуктов', error)
     }
   },
 
   // Обновление продукта
-  async updateProduct({ commit }, product) {
+  async updateProduct({ dispatch }, product) {
     try {
-      await this.$axios.$put('/api/product/update/' + product._id, product)
+      await this.$axios.$put('/api/product/update/' + product.get('_id'), product)
+      await dispatch('getAllProducts')
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка обновления', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка обновления продукта', error)
     }
   },
 
@@ -30,7 +31,7 @@ export const actions = {
       await this.$axios.$post('/api/product/create', product)
       await dispatch('getAllProducts')
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка добавления', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка добавления продукта', error)
     }
   },
 }

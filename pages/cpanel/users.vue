@@ -1,120 +1,34 @@
 <template>
-  <!-- users-start -->
+  <!-- users -->
   <section class="container">
     <div class="row">
-      <div class="col-3">
-        <div class="row mb-30">
-          <div class="col-12">
-            <h4 class="mainTitle">Добавить</h4>
-          </div>
-        </div>
-        <form class="form-row" @submit.prevent="create">
-          <div class="form-group col-12">
-            <label for="user-name">Имя</label>
-            <input type="text" v-model="user.name" class="form-control" id="user-name" required />
-          </div>
-          <div class="form-group col-12">
-            <label for="user-login">Логин</label>
-            <input type="text" v-model="user.login" class="form-control" id="user-login" required />
-          </div>
-          <div class="form-group col-12">
-            <label for="user-password">Пароль</label>
-            <input type="password" v-model="user.password" class="form-control" id="user-password" required />
-          </div>
-          <div class="form-group col-12 text-right">
-            <button type="submit" class="btn btn-green-white">Добавить</button>
-          </div>
-        </form>
-      </div>
-      <div class="offset-2 col-7">
-        <div class="row mb-30">
-          <div class="col-12">
-            <h4 class="mainTitle">Пользователи</h4>
-          </div>
-        </div>
-        <div class="row mb-20 border pt-2 pb-2 bg-6f6 rounded" v-for="(user, idx) in users" :key="idx">
-          <div class="col-4">
-            <label for="user-new-name">Имя</label>
-            <input type="text" v-model="user.name" class="form-control" id="user-new-name" />
-          </div>
-          <div class="col-4">
-            <label for="user-new-login">Логин</label>
-            <input type="text" v-model="user.login" class="form-control" id="user-new-login" />
-          </div>
-          <div class="col-4">
-            <label for="user-new-password">Пароль</label>
-            <input type="password" v-model="user.password" class="form-control" id="user-new-password" />
-          </div>
-          <div class="col-6 mt-10">
-            <label for="user-created">Дата создания</label>
-            <p id="user-created" class="mb-0">{{ user.created }}</p>
-          </div>
-          <div class="col-3 mt-10">
-            <button class="btn btn-green-white w-100" @click.prevent="edit(user)">Обновить</button>
-          </div>
-          <div class="col-3 mt-10">
-            <button class="btn btn-red-white w-100" @click.prevent="remove(user._id)">Удалить</button>
-          </div>
-        </div>
-        <h4 v-if="users == 0" class="mb-0 color-545">Список пользователей пуст.</h4>
-      </div>
+      <app-create-user />
+      <app-edit-user />
     </div>
   </section>
-  <!-- users-end -->
+  <!-- //users -->
 </template>
 
 <script>
+import AppCreateUser from '~/components/cpanel/user/Create'
+import AppEditUser from '~/components/cpanel/user/Edit'
+
 export default {
   layout: 'cpanel/cpanel',
-  data() {
-    return {
-      user: {
-        name: 'name',
-        login: 'login',
-        password: 'password',
-      },
-      users: [],
+  components: {
+    AppCreateUser,
+    AppEditUser,
+  },
+  // Обновляем хранилище
+  async fetch({ store }) {
+    try {
+      if (store.getters['users/usersList'].length === 0) {
+        await store.dispatch('users/getAllUsers')
+        console.log('[USERS.VUE] Вызван fetch получения пользователей')
+      }
+    } catch (error) {
+      console.error('[USERS.VUE] Ошибка получения пользователей', error)
     }
-  },
-  mounted() {
-    this.getAll()
-  },
-  methods: {
-    async create() {
-      try {
-        await this.$axios.$post('/api/user/create', this.user)
-        this.getAll()
-        this.clearForm()
-      } catch (error) {
-        console.error('Ошибка при создании пользователя', error)
-      }
-    },
-    async getAll() {
-      try {
-        this.users = await this.$axios.$get('/api/user/getall')
-      } catch (error) {
-        console.error('Не удалось получить список пользователей', error)
-      }
-    },
-    async edit(item) {
-      try {
-        await this.$axios.$put('/api/user/update/' + item._id, item)
-        await this.getAll()
-      } catch (error) {
-        console.error('Не удалось обновить пользователя', error)
-      }
-    },
-    async remove(itemId) {
-      try {
-        await this.$axios.$delete('/api/user/remove/' + itemId)
-        await this.getAll()
-      } catch (error) {
-        console.error('не удалось удалить пользователя', error)
-      }
-    },
-    clearForm() {
-      this.user.name = this.user.login = this.user.password = ''
-    },
   },
 }
 </script>
