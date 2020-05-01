@@ -74,8 +74,8 @@ export default {
   },
   methods: {
     getProducts() {
-      // Получаем продукты из store/product.js
-      this.products = this.$store.state.product.list
+      // Получаем продукты из store/basket.js
+      this.products = this.$store.state.basket.basketProducts
       return this.products
     },
     sumProductPrice() {
@@ -86,9 +86,9 @@ export default {
       })
       return productPrice
     },
-    // Метод store/product.js от продуктов
+    // Метод store/basket.js от продуктов
     clearBasket() {
-      this.$store.commit('product/clear')
+      this.$store.commit('basket/clear')
       this.getProducts()
     },
   },

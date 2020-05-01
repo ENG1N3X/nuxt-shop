@@ -118,7 +118,7 @@ export default {
 
         this.selectedNewImage = this.selectedImageURL = null
       } catch (e) {
-        console.error('не удалось обновить товар', e)
+        console.error('Не удалось обновить товар', e)
       }
     },
     async remove(itemId) {
@@ -126,7 +126,7 @@ export default {
         await this.$axios.$delete('/api/product/remove/' + itemId)
         await this.getAll()
       } catch (e) {
-        console.error('не удалось удалить товар', e)
+        console.error('Не удалось удалить товар', e)
       }
     },
     onFileSelected(event) {

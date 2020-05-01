@@ -26,12 +26,19 @@
 
 <script>
 export default {
-  async asyncData({ $axios }) {
+  computed: {
+    products() {
+      return this.$store.getters['products/productsList']
+    },
+  },
+  async fetch({ store }) {
     try {
-      const products = await $axios.get('/api/product/getall')
-      return { products: products.data }
-    } catch (e) {
-      console.error('Ошибка загрузки продуктов: ', e)
+      if (store.getters['products/productsList'].length === 0) {
+        await store.dispatch('products/getAllProducts')
+        console.log('[INDEX.VUE] Вызван fetch получения продуктов')
+      }
+    } catch (error) {
+      console.error('[INDEX.VUE] Ошибка получения', error)
     }
   },
 }

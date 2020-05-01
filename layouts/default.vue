@@ -54,9 +54,9 @@ export default {
     }
   },
   computed: {
-    // Метод получения из store/product.js кол-ва элементов в корзине
+    // Метод получения из store/basket.js кол-ва элементов в корзине
     productsCount() {
-      return this.$store.state.product.list.length
+      return this.$store.state.basket.basketProducts.length
     },
   },
 }

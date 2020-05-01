@@ -57,9 +57,9 @@ export default {
     }
   },
   methods: {
-    // Метод для отправки продукта в store/product.js
+    // Метод для отправки продукта в store/basket.js
     addToBasket(item) {
-      this.$store.commit('product/add', item)
+      this.$store.commit('basket/add', item)
     },
   },
 }
