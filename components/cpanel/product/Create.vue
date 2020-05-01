@@ -1,4 +1,5 @@
 <template>
+  <!-- create-product -->
   <form class="form-row mb-50" @submit.prevent="create">
     <div class="col-4 border d-flex justify-content-center align-items-center">
       <img v-if="selectedImageURL" :src="selectedImageURL" alt="product" />
@@ -33,6 +34,7 @@
       </div>
     </div>
   </form>
+  <!-- //create-product -->
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <!-- admin-start -->
+  <!-- products -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
@@ -7,16 +7,14 @@
       </div>
     </div>
 
-    <!-- create-product-component -->
     <app-create-product @created="() => getAll()" />
-    <!-- //create-product-component -->
 
-    <div class="row mb-30" v-if="products != 0">
+    <div v-if="products != 0" class="row mb-30">
       <div class="col-12">
         <h1 class="mainTitle">Редактировать товар</h1>
       </div>
     </div>
-    <!-- editProduct-start -->
+    <!-- products edit -->
     <div class="row align-items-center editProduct" v-for="(product, idx) in products" :key="idx">
       <div class="col-6">
         <h4 class="editProduct__name">
@@ -71,9 +69,9 @@
         </form>
       </div>
     </div>
-    <!-- editProduct-end -->
+    <!-- //products edit -->
   </section>
-  <!-- admin-end -->
+  <!-- //products -->
 </template>
 
 <script>

@@ -1,4 +1,5 @@
 <template>
+  <!-- users-start -->
   <section class="container">
     <div class="row">
       <div class="col-3">
@@ -59,6 +60,7 @@
       </div>
     </div>
   </section>
+  <!-- users-end -->
 </template>
 
 <script>
@@ -70,7 +72,6 @@ export default {
         name: 'name',
         login: 'login',
         password: 'password',
-        // created: '228',
       },
       users: [],
     }
@@ -82,7 +83,6 @@ export default {
     async create() {
       try {
         await this.$axios.$post('/api/user/create', this.user)
-        // this.$emit('created')
         this.getAll()
         this.clearForm()
       } catch (error) {

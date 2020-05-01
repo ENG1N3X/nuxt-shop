@@ -1,13 +1,21 @@
 <template>
+  <!-- default layout -->
   <div>
-    <!-- header-start -->
+    <!-- header -->
     <header class="container mb-80">
       <div class="row align-items-center">
         <div class="col-3">
-          <app-header-logo></app-header-logo>
+          <nuxt-link to="/" class="headerLogo">
+            <img class="headerLogo__img anim-rotate" src="~/assets/img/logo.png" alt="logo" />
+            <span class="headerLogo__text">{{ logoText }}</span>
+          </nuxt-link>
         </div>
         <div class="col-6">
-          <app-header-nav></app-header-nav>
+          <nav class="nav headerNav">
+            <nuxt-link to="/" class="nav-link" exact>Главная</nuxt-link>
+            <nuxt-link to="/about" class="nav-link">О Нас</nuxt-link>
+            <nuxt-link to="/cpanel/auth" class="nav-link">Админка</nuxt-link>
+          </nav>
         </div>
         <div class="col-2 text-right">
           <a class="headerPhone" :href="`tel:${number}`">{{ numberText }}</a>
@@ -20,11 +28,9 @@
         </div>
       </div>
     </header>
-    <!-- header-end -->
-    <!-- nuxt-start -->
+    <!-- //header -->
     <nuxt />
-    <!-- nuxt-end -->
-    <!-- footer-start -->
+    <!-- footer -->
     <footer class="container mt-80">
       <div class="row">
         <div class="col-12">
@@ -32,25 +38,20 @@
         </div>
       </div>
     </footer>
-    <!-- footer-end -->
+    <!-- //footer -->
   </div>
+  <!-- //default layout -->
 </template>
 
 <script>
-import AppHeaderLogo from '~/components/header/Logo.vue'
-import AppHeaderNav from '~/components/header/Nav.vue'
-
 export default {
   data() {
     return {
+      logoText: 'Наш крутой магазин',
       copyrightText: '© 2020',
       number: 88005553535,
       numberText: '8-800-555-35-35',
     }
-  },
-  components: {
-    AppHeaderLogo,
-    AppHeaderNav,
   },
   computed: {
     // Метод получения из store/product.js кол-ва элементов в корзине

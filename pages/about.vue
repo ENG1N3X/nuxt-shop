@@ -1,5 +1,5 @@
 <template>
-  <!-- about-start -->
+  <!-- about -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
@@ -40,5 +40,5 @@
       </div>
     </div>
   </section>
-  <!-- about-end -->
+  <!-- //about -->
 </template>

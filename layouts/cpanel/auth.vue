@@ -1,7 +1,9 @@
 <template>
+  <!-- auth layout -->
   <div>
     <nuxt />
   </div>
+  <!-- //auth layout -->
 </template>
 
 <style scoped lang="sass">

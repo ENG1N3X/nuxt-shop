@@ -10,16 +10,16 @@ module.exports.create = async (req, res) => {
     if (req.files.image) {
       const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
       const fileImageData = req.files.image.data
-      const savePath = path.resolve(__dirname, '../../static/products/')
+      const savePath = path.resolve(__dirname, '../../static/upload/products/')
 
       await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
         if (!error) {
           console.error('Не удалось загрузить картинку!', error)
         }
       })
-      fd.image = 'products/' + fileName
+      fd.image = 'upload/products/' + fileName
     } else {
-      fd.image = 'products/fake-product.png'
+      fd.image = 'upload/products/fake-product.png'
     }
 
     await Product.create(fd)
@@ -36,14 +36,14 @@ module.exports.update = async (req, res) => {
     if (req.files.image) {
       const fileName = moment().format('YYYY-MM-DD-HH-mm-ss-') + req.files.image.name
       const fileImageData = req.files.image.data
-      const savePath = path.resolve(__dirname, '../../static/products/')
+      const savePath = path.resolve(__dirname, '../../static/upload/products/')
 
       await fs.writeFileSync(`${savePath}/${fileName}`, fileImageData, (error) => {
         if (!error) {
           console.error('Не удалось загрузить картинку!', error)
         }
       })
-      fd.image = 'products/' + fileName
+      fd.image = 'upload/products/' + fileName
     }
 
     await Product.updateOne({ _id: req.params.id }, fd, { new: true })

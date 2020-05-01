@@ -1,12 +1,12 @@
 <template>
-  <!-- basket-start -->
+  <!-- basket -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
         <h2 class="mainTitle">Корзина</h2>
       </div>
     </div>
-    <div class="row mb-30" v-if="products != 0">
+    <div v-if="products != 0" class="row mb-30">
       <div class="col-8">
         <h3 class="d-flex">
           Итого:
@@ -53,13 +53,13 @@
         </div>
       </div>
     </div>
-    <div class="row" v-else>
+    <div v-else class="row">
       <div class="col-12">
         <h4 class="mb-0 color-545">В коризне пусто</h4>
       </div>
     </div>
   </section>
-  <!-- basket-end -->
+  <!-- //basket -->
 </template>
 
 <script>

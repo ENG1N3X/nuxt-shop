@@ -1,5 +1,5 @@
 <template>
-  <!-- auth-start -->
+  <!-- auth -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
@@ -27,7 +27,7 @@
       </div>
     </div>
   </section>
-  <!-- auth-end -->
+  <!-- //auth -->
 </template>
 
 <script>

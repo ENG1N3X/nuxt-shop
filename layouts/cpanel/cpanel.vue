@@ -1,25 +1,20 @@
 <template>
+  <!-- cpanel layout -->
   <div>
-    <!-- header-admin-start -->
+    <!-- header -->
     <header class="container mt-40 mb-80">
       <div class="row">
         <div class="col-12">
-          <app-header-nav></app-header-nav>
+          <nav class="nav headerNav">
+            <nuxt-link to="/" class="nav-link" exact>Главная</nuxt-link>
+            <nuxt-link to="/cpanel/products" class="nav-link">Товары</nuxt-link>
+            <nuxt-link to="/cpanel/users" class="nav-link">Пользователи</nuxt-link>
+          </nav>
         </div>
       </div>
     </header>
-    <!-- header-admin-end -->
-
+    <!-- //header -->
     <nuxt />
   </div>
+  <!-- //cpanel layout -->
 </template>
-
-<script>
-import AppHeaderNav from '~/components/cpanel/Nav.vue'
-
-export default {
-  components: {
-    AppHeaderNav,
-  },
-}
-</script>

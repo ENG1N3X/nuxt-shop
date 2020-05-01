@@ -1,5 +1,5 @@
 <template>
-  <!-- product-start -->
+  <!-- product -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
@@ -43,7 +43,7 @@
       </div>
     </div>
   </section>
-  <!-- product-end -->
+  <!-- //product -->
 </template>
 
 <script>
