@@ -95,6 +95,11 @@ export default {
 
         await this.$store.dispatch('products/updateProduct', fd)
 
+        this.$notify({
+          group: 'success',
+          text: 'Товар обновлен',
+        })
+
         this.selectedNewImage = this.selectedImageURL = null
       } catch (error) {
         console.error('[PRODUCTS.VUE] Не удалось обновить товар', error)
@@ -104,6 +109,11 @@ export default {
       try {
         await this.$axios.$delete('/api/product/remove/' + itemId)
         this.$store.dispatch('products/getAllProducts')
+
+        this.$notify({
+          group: 'success',
+          text: 'Товар удален из базы',
+        })
       } catch (error) {
         console.error('[PRODUCTS.VUE] Не удалось удалить товар', error)
       }

@@ -46,6 +46,11 @@ export default {
     async edit(item) {
       try {
         await this.$store.dispatch('users/updateUser', item)
+
+        this.$notify({
+          group: 'success',
+          text: 'Пользователь обновлен',
+        })
       } catch (error) {
         console.error('Не удалось обновить пользователя', error)
       }
@@ -54,6 +59,11 @@ export default {
       try {
         await this.$axios.$delete('/api/user/remove/' + itemId)
         this.$store.dispatch('users/getAllUsers')
+
+        this.$notify({
+          group: 'success',
+          text: 'Пользователь удален',
+        })
       } catch (error) {
         console.error('не удалось удалить пользователя', error)
       }

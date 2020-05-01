@@ -5,6 +5,7 @@
       <app-create-user />
       <app-edit-user />
     </div>
+    <notifications group="success" class="success-notify" />
   </section>
   <!-- //users -->
 </template>

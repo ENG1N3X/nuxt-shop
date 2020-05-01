@@ -3,6 +3,7 @@
   <section class="container">
     <app-create-product />
     <app-edit-product />
+    <notifications group="success" class="success-notify" />
   </section>
   <!-- //products -->
 </template>

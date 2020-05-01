@@ -58,6 +58,7 @@
         <h4 class="mb-0 color-545">В коризне пусто</h4>
       </div>
     </div>
+    <notifications group="success" class="success-notify" />
   </section>
   <!-- //basket -->
 </template>
@@ -82,6 +83,10 @@ export default {
     // Метод очистки store/basket.js от продуктов
     clearBasket() {
       this.$store.commit('basket/clear')
+      this.$notify({
+        group: 'success',
+        text: 'Корзина очищена',
+      })
     },
   },
 }

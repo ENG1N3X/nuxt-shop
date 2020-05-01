@@ -42,6 +42,7 @@
         </div>
       </div>
     </div>
+    <notifications group="success" class="success-notify" />
   </section>
   <!-- //product -->
 </template>
@@ -60,6 +61,10 @@ export default {
     // Метод для отправки продукта в store/basket.js
     addToBasket(item) {
       this.$store.commit('basket/add', item)
+      this.$notify({
+        group: 'success',
+        text: 'Товар добавлен в корзину',
+      })
     },
   },
 }

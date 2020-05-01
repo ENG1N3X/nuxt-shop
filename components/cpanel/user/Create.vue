@@ -43,6 +43,13 @@ export default {
       try {
         await this.$store.dispatch('users/addUser', this.user)
 
+        console.log('${this.user}')
+
+        this.$notify({
+          group: 'success',
+          text: 'Добавлен пользователь ' + this.user.name,
+        })
+
         this.clearForm()
       } catch (error) {
         console.error('Ошибка при создании пользователя', error)

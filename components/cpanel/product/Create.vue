@@ -74,6 +74,11 @@ export default {
 
         await this.$store.dispatch('products/addProduct', fd)
 
+        this.$notify({
+          group: 'success',
+          text: 'Товар добавлен в базу',
+        })
+
         this.clearForm()
       } catch (e) {
         console.error('Ошибка при создании товара', e)
