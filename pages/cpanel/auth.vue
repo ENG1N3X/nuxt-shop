@@ -39,8 +39,6 @@ export default {
       form: {
         login: 'admin',
         password: 'admin',
-        name: null,
-        logged: false,
       },
     }
   },
