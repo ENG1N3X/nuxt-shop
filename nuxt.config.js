@@ -65,7 +65,7 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/cpanel/products', method: 'post', propertyName: 'token' },
+          login: { url: '/api/auth', method: 'post', propertyName: 'token' },
           logout: false,
           user: { url: '/cpanel/products', method: 'get', propertyName: 'data' },
         },

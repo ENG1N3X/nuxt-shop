@@ -7,6 +7,7 @@ const app = express()
 // Добавляем роуты
 const productRoutes = require('./routes/product.routs')
 const userRoutes = require('./routes/user.routs')
+const authRoutes = require('./routes/auth.routs')
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -37,5 +38,6 @@ app.use(bodyParser.json())
 // REST API
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/auth', authRoutes)
 
 module.exports = app
