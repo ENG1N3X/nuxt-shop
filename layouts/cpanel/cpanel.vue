@@ -1,6 +1,6 @@
 <template>
   <!-- cpanel layout -->
-  <div>
+  <div v-if="isUserLogged">
     <!-- header -->
     <header class="container mt-40 mb-80">
       <div class="row">
@@ -17,6 +17,16 @@
     <nuxt />
     <app-footer />
   </div>
+  <div v-else>
+    <header class="container access">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="mainTitle">У вас недостаточно прав, чтобы видеть это.</h1>
+          <nuxt-link to="/" class="btn btn-white-blue mt-80">На главную</nuxt-link>
+        </div>
+      </div>
+    </header>
+  </div>
   <!-- //cpanel layout -->
 </template>
 
@@ -27,5 +37,20 @@ export default {
   components: {
     AppFooter,
   },
+  middleware: ['auth'],
+  computed: {
+    isUserLogged() {
+      const userAuth = this.$store.getters['auth/userAuth']
+      return userAuth.logged
+    },
+  },
 }
 </script>
+
+<style lang="sass" scoped>
+.access
+  min-height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+</style>

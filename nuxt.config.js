@@ -26,7 +26,6 @@ module.exports = {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active',
-    // middleware: ['auth'],
   },
   /*
    ** Global CSS
@@ -65,9 +64,9 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/api/auth', method: 'post', propertyName: 'token' },
+          login: { url: '/api/auth/checkAuth', method: 'post', propertyName: 'data' },
+          user: false,
           logout: false,
-          user: { url: '/cpanel/products', method: 'get', propertyName: 'data' },
         },
       },
     },

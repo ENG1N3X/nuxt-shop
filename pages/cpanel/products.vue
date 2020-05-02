@@ -18,6 +18,7 @@ export default {
     AppCreateProduct,
     AppEditProduct,
   },
+
   // Обновляем хранилище
   async fetch({ store }) {
     try {

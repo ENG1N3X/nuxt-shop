@@ -38,7 +38,7 @@
       </div>
       <!-- //edit-user -->
     </div>
-    <!-- <notifications group="success" class="success-notify" /> -->
+    <notifications group="success" class="success-notify" />
   </section>
   <!-- //users -->
 </template>
