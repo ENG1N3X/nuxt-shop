@@ -26,6 +26,7 @@ module.exports = {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active',
+    // middleware: ['auth'],
   },
   /*
    ** Global CSS
@@ -47,6 +48,8 @@ module.exports = {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/
     '@nuxtjs/axios',
+    // Doc: https://auth.nuxtjs.org/
+    '@nuxtjs/auth',
   ],
   /*
    ** Axios module configuration
@@ -54,6 +57,20 @@ module.exports = {
    */
   axios: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  },
+  /*
+   ** Auth configuration
+   */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/cpanel/products', method: 'post', propertyName: 'token' },
+          logout: false,
+          user: { url: '/cpanel/products', method: 'get', propertyName: 'data' },
+        },
+      },
+    },
   },
   /*
    ** Build configuration
