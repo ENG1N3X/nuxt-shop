@@ -12,6 +12,7 @@ export const state = () => ({
 export const actions = {
   // Получение данных пользователя
   setUserData({ commit }, userData) {
+    console.log(userData)
     commit('SET_USER_DATA', userData)
   },
 }

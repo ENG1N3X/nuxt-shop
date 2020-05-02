@@ -48,12 +48,11 @@ export default {
     async userAuth(formInfo) {
       try {
         const response = await this.$auth.loginWith('local', { data: formInfo })
-        this.form = {
+        this.$store.dispatch('auth/setUserData', {
           name: response.data.name,
           login: response.data.login,
           logged: this.$auth.loggedIn,
-        }
-        this.$store.dispatch('auth/setUserData', this.form)
+        })
 
         this.$router.push('/cpanel/products')
       } catch (error) {
