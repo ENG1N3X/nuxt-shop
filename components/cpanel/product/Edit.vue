@@ -6,7 +6,7 @@
         <h1 class="mainTitle">Редактировать товар</h1>
       </div>
     </div>
-    <div class="row align-items-center editProduct" v-for="(product, idx) in productsComputed" :key="idx">
+    <div class="row align-items-center editProduct" v-for="(product, idx) in displayedProducts" :key="idx">
       <div class="col-6">
         <h4 class="editProduct__name">
           {{ product.title }}
@@ -60,6 +60,15 @@
         </form>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
+          <button type="button" class="btn btn-outline-secondary" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
+          <button type="button" class="btn btn-outline-secondary" v-if="page < pages.length" @click="page++"><i class="fa fa-angle-double-right"></i></button>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- //edit-product -->
 </template>
@@ -71,11 +80,17 @@ export default {
       products: [],
       selectedNewImage: null,
       selectedImageURL: null,
+      page: 1,
+      perPage: 5,
+      pages: [],
     }
   },
   computed: {
     productsComputed() {
       return (this.products = JSON.parse(JSON.stringify(this.$store.getters['products/productsList'])))
+    },
+    displayedProducts() {
+      return this.paginate(this.products)
     },
   },
   methods: {
@@ -123,6 +138,24 @@ export default {
       if (this.selectedNewImage) {
         this.selectedImageURL = URL.createObjectURL(this.selectedNewImage)
       }
+    },
+    setPages() {
+      let numberOfPages = Math.ceil(this.products.length / this.perPage)
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index)
+      }
+    },
+    paginate(products) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = page * perPage - perPage
+      let to = page * perPage
+      return products.slice(from, to)
+    },
+  },
+  watch: {
+    products() {
+      this.setPages()
     },
   },
 }

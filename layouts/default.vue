@@ -30,25 +30,21 @@
     </header>
     <!-- //header -->
     <nuxt />
-    <!-- footer -->
-    <footer class="container mt-80">
-      <div class="row">
-        <div class="col-12">
-          <span class="d-block text-center">{{ copyrightText }}</span>
-        </div>
-      </div>
-    </footer>
-    <!-- //footer -->
+    <app-footer />
   </div>
   <!-- //default layout -->
 </template>
 
 <script>
+import AppFooter from '~/components/footer.vue'
+
 export default {
+  components: {
+    AppFooter,
+  },
   data() {
     return {
       logoText: 'Наш крутой магазин',
-      copyrightText: '© 2020',
       number: 88005553535,
       numberText: '8-800-555-35-35',
     }

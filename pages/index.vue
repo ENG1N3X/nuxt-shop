@@ -6,14 +6,21 @@
         <h2 class="mainTitle">Товары</h2>
       </div>
     </div>
-    <div v-if="products != 0" class="row justify-content-center">
-      <div class="col-4 mb-40" v-for="(product, idx) in products" :key="idx">
+    <div v-if="productsComputed != 0" class="row justify-content-center">
+      <div class="col-4 mb-40" v-for="(product, idx) in displayedProducts" :key="idx">
         <nuxt-link :to="`/product/${product._id}`" class="choice">
           <img class="img-fluid" :src="product.image" :alt="product.title" />
           <h2 class="choiceTitle">{{ product.title }}</h2>
           <h5 class="color-545">{{ product.price }} руб.</h5>
           <button class="btn btn-green-black">Подробнее</button>
         </nuxt-link>
+      </div>
+      <div class="col-12 text-center">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-secondary" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
+          <button type="button" class="btn btn-outline-secondary" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
+          <button type="button" class="btn btn-outline-secondary" v-if="page < pages.length" @click="page++"><i class="fa fa-angle-double-right"></i></button>
+        </div>
       </div>
     </div>
     <div v-else class="row">
@@ -27,9 +34,41 @@
 
 <script>
 export default {
+  data() {
+    return {
+      products: [],
+      page: 1,
+      perPage: 2,
+      pages: [],
+    }
+  },
   computed: {
+    productsComputed() {
+      this.products = this.$store.getters['products/productsList']
+      return this.products
+    },
+    displayedProducts() {
+      return this.paginate(this.products)
+    },
+  },
+  methods: {
+    setPages() {
+      let numberOfPages = Math.ceil(this.products.length / this.perPage)
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index)
+      }
+    },
+    paginate(products) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = page * perPage - perPage
+      let to = page * perPage
+      return products.slice(from, to)
+    },
+  },
+  watch: {
     products() {
-      return this.$store.getters['products/productsList']
+      this.setPages()
     },
   },
   async fetch({ store }) {

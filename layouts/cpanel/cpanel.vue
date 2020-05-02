@@ -15,6 +15,17 @@
     </header>
     <!-- //header -->
     <nuxt />
+    <app-footer />
   </div>
   <!-- //cpanel layout -->
 </template>
+
+<script>
+import AppFooter from '~/components/footer.vue'
+
+export default {
+  components: {
+    AppFooter,
+  },
+}
+</script>
