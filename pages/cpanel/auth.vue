@@ -51,15 +51,12 @@ export default {
           login: response.data.login,
           logged: this.$auth.loggedIn,
         })
-
-        this.$router.push('/cpanel/products')
       } catch (error) {
-        this.$router.push('/cpanel/auth')
         this.$notify({
           group: 'error',
-          text: 'Неверный логин или пароль.',
+          text: error.response.data.message,
         })
-        console.log('[AUTH.VUE] Ошибка метода авторизации', error)
+        console.log('[AUTH.VUE] Ошибка метода авторизации\n' + error.response.data.message + '\n' + error)
       }
     },
   },

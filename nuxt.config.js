@@ -70,6 +70,12 @@ module.exports = {
         },
       },
     },
+    redirect: {
+      login: '/cpanel/auth',
+      logout: '/cpanel/auth',
+      callback: '/cpanel/auth',
+      home: '/cpanel/products', // path after login
+    },
   },
   /*
    ** Build configuration
