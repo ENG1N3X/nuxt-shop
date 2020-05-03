@@ -41,7 +41,7 @@ export default {
   methods: {
     async create() {
       try {
-        await this.$store.dispatch('users/addUser', this.user)
+        await this.$store.dispatch('cpanel/users/addUser', this.user)
 
         this.$notify({
           group: 'success',

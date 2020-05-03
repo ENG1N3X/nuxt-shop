@@ -72,7 +72,7 @@ module.exports = {
     },
     redirect: {
       login: '/cpanel/auth',
-      logout: '/cpanel/auth',
+      logout: '/', // this.$auth.logout()
       callback: '/cpanel/auth',
       home: '/cpanel/products', // path after login
     },

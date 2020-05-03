@@ -46,7 +46,7 @@ export default {
     async userAuth(formInfo) {
       try {
         const response = await this.$auth.loginWith('local', { data: formInfo })
-        this.$store.dispatch('auth/setUserData', {
+        this.$store.dispatch('cpanel/authMod/setUserData', {
           name: response.data.name,
           login: response.data.login,
           logged: this.$auth.loggedIn,

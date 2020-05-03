@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     productsComputed() {
-      this.products = this.$store.getters['products/productsList']
+      this.products = this.$store.getters['cpanel/products/productsList']
       return this.products
     },
     displayedProducts() {
@@ -73,8 +73,8 @@ export default {
   },
   async fetch({ store }) {
     try {
-      if (store.getters['products/productsList'].length === 0) {
-        await store.dispatch('products/getAllProducts')
+      if (store.getters['cpanel/products/productsList'].length === 0) {
+        await store.dispatch('cpanel/products/getAllProducts')
         console.log('[INDEX.VUE] Вызван fetch получения продуктов')
       }
     } catch (error) {

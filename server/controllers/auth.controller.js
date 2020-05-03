@@ -13,10 +13,10 @@ module.exports.checkAuth = async (req, res) => {
         }
         res.status(200).json(userData)
       } else {
-        res.status(401).json({ message: 'Неверный пароль!' })
+        res.status(401).json({ message: 'Неверный логин или пароль!' })
       }
     } else {
-      res.status(401).json({ message: 'Неверный логин!' })
+      res.status(401).json({ message: 'Неверный логин или пароль!' })
     }
   } catch (error) {
     console.error('error', error)

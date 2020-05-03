@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     productsComputed() {
-      return (this.products = JSON.parse(JSON.stringify(this.$store.getters['products/productsList'])))
+      return (this.products = JSON.parse(JSON.stringify(this.$store.getters['cpanel/products/productsList'])))
     },
     displayedProducts() {
       return this.paginate(this.products)
@@ -108,7 +108,7 @@ export default {
           fd.append('image', this.selectedNewImage, this.selectedNewImage.name)
         }
 
-        await this.$store.dispatch('products/updateProduct', fd)
+        await this.$store.dispatch('cpanel/products/updateProduct', fd)
 
         this.$notify({
           group: 'success',
@@ -123,7 +123,7 @@ export default {
     async remove(itemId) {
       try {
         await this.$axios.$delete('/api/product/remove/' + itemId)
-        this.$store.dispatch('products/getAllProducts')
+        this.$store.dispatch('cpanel/products/getAllProducts')
 
         this.$notify({
           group: 'success',

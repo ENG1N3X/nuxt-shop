@@ -53,13 +53,13 @@ export default {
   },
   computed: {
     usersComputed() {
-      return JSON.parse(JSON.stringify(this.$store.getters['users/usersList']))
+      return JSON.parse(JSON.stringify(this.$store.getters['cpanel/users/usersList']))
     },
   },
   methods: {
     async edit(item) {
       try {
-        await this.$store.dispatch('users/updateUser', item)
+        await this.$store.dispatch('cpanel/users/updateUser', item)
 
         this.$notify({
           group: 'success',
@@ -72,7 +72,7 @@ export default {
     async remove(itemId) {
       try {
         await this.$axios.$delete('/api/user/remove/' + itemId)
-        this.$store.dispatch('users/getAllUsers')
+        this.$store.dispatch('cpanel/users/getAllUsers')
 
         this.$notify({
           group: 'success',
@@ -86,8 +86,8 @@ export default {
   // Обновляем хранилище
   async fetch({ store }) {
     try {
-      if (store.getters['users/usersList'].length === 0) {
-        await store.dispatch('users/getAllUsers')
+      if (store.getters['cpanel/users/usersList'].length === 0) {
+        await store.dispatch('cpanel/users/getAllUsers')
         console.log('[USERS.VUE] Вызван fetch получения пользователей')
       }
     } catch (error) {

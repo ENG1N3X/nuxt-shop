@@ -72,7 +72,7 @@ export default {
           fd.append('image', this.form.image, this.form.image.name)
         }
 
-        await this.$store.dispatch('products/addProduct', fd)
+        await this.$store.dispatch('cpanel/products/addProduct', fd)
 
         this.$notify({
           group: 'success',
