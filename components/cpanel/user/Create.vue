@@ -40,17 +40,18 @@ export default {
   },
   methods: {
     async create() {
-      try {
-        await this.$store.dispatch('cpanel/users/addUser', this.user)
-
+      const error = await this.$store.dispatch('cpanel/users/addUser', this.user)
+      if (error) {
+        this.$notify({
+          group: 'error',
+          text: error,
+        })
+      } else {
         this.$notify({
           group: 'success',
           text: 'Добавлен пользователь ' + this.user.name,
         })
-
         this.clearForm()
-      } catch (error) {
-        console.error('Ошибка при создании пользователя', error)
       }
     },
     clearForm() {

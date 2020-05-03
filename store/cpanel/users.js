@@ -31,7 +31,8 @@ export const actions = {
       await this.$axios.$post('/api/user/create', user)
       await dispatch('getAllUsers')
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка добавления пользователя', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка добавления пользователя\n' + error.response.data.message + '\n' + error)
+      return error.response.data.message
     }
   },
 }

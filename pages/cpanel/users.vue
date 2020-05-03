@@ -39,6 +39,7 @@
       <!-- //edit-user -->
     </div>
     <notifications group="success" class="success-notify" />
+    <notifications group="error" class="error-notify" />
   </section>
   <!-- //users -->
 </template>
