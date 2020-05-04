@@ -3,11 +3,11 @@
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
-        <h2 class="mainTitle">Админ-панель логин</h2>
+        <h2 class="mainTitle">Вход в админ-панель</h2>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-6">
+      <div class="col-8">
         <form class="form-row justify-content-between" @submit.prevent="userAuth(form)">
           <div class="form-group col-12">
             <label>Логин</label>
@@ -17,10 +17,10 @@
             <label>Пароль</label>
             <input type="text" class="form-control" v-model="form.password" placeholder="Введите пароль" required />
           </div>
-          <div class="form-group col-3">
+          <div class="form-group col-4">
             <button type="submit" class="btn btn-white-blue">Вход</button>
           </div>
-          <div class="form-group col-3 text-right">
+          <div class="form-group col-4 text-right">
             <nuxt-link to="/" class="btn btn-white-blue">Выход</nuxt-link>
           </div>
         </form>
@@ -62,3 +62,12 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+section
+  min-height: 100vh
+  display: flex
+  justify-content: center
+  flex-direction: column
+  align-items: center
+</style>

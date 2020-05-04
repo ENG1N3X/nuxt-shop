@@ -17,10 +17,8 @@
             <nuxt-link to="/cpanel/auth" class="nav-link">Админка</nuxt-link>
           </nav>
         </div>
-        <div class="col-2 text-right">
+        <div class="col-3 d-flex justify-content-between align-items-center">
           <a class="headerPhone" :href="`tel:${number}`">{{ numberText }}</a>
-        </div>
-        <div class="col-1 text-right">
           <nuxt-link to="/basket" class="headerBasket">
             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
             <span v-if="productsCount != 0">{{ productsCount }}</span>
