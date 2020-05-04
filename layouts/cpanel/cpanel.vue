@@ -8,6 +8,7 @@
           <nav class="nav headerNav">
             <nuxt-link to="/cpanel/products" class="nav-link">Товары</nuxt-link>
             <nuxt-link to="/cpanel/users" class="nav-link">Пользователи</nuxt-link>
+            <nuxt-link to="/cpanel/orders" class="nav-link">Заказы</nuxt-link>
             <a class="nav-link pointer" exact @click="logout">Выход</a>
           </nav>
         </div>

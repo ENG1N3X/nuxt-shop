@@ -12,16 +12,16 @@
         </div>
         <div class="row mb-20 border pt-2 pb-2 bg-6f6 rounded" v-for="(user, idx) in usersComputed" :key="idx">
           <div class="col-4">
-            <label for="user-new-name">Имя</label>
-            <input type="text" v-model="user.name" class="form-control" id="user-new-name" />
+            <label>Имя</label>
+            <input type="text" v-model="user.name" class="form-control" />
           </div>
           <div class="col-4">
-            <label for="user-new-login">Логин</label>
-            <input type="text" v-model="user.login" class="form-control" id="user-new-login" />
+            <label>Логин</label>
+            <input type="text" v-model="user.login" class="form-control" />
           </div>
           <div class="col-4">
-            <label for="user-new-password">Пароль</label>
-            <input type="password" v-model="user.password" class="form-control" id="user-new-password" />
+            <label>Пароль</label>
+            <input type="password" v-model="user.password" class="form-control" />
           </div>
           <div class="col-6 mt-10">
             <label for="user-created">Дата создания</label>
