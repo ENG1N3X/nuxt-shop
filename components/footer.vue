@@ -1,14 +1,12 @@
 <template>
   <div>
-    <!-- footer -->
     <footer class="container mt-80">
       <div class="row">
         <div class="col-12">
-          <span class="d-block text-center">{{ copyrightText }}</span>
+          <span class="d-block text-center">{{ copyright }}</span>
         </div>
       </div>
     </footer>
-    <!-- //footer -->
   </div>
 </template>
 
@@ -16,7 +14,7 @@
 export default {
   data() {
     return {
-      copyrightText: '© 2020',
+      copyright: '© 2020',
     }
   },
 }

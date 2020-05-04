@@ -17,7 +17,7 @@
       </div>
       <div class="col-12 text-center">
         <div class="btn-group">
-          <button type="button" class="btn btn-outline-secondary" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
+          <button type="button" class="btn btn-outline-dark" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
           <button type="button" class="btn btn-outline-secondary" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
           <button type="button" class="btn btn-outline-secondary" v-if="page < pages.length" @click="page++"><i class="fa fa-angle-double-right"></i></button>
         </div>

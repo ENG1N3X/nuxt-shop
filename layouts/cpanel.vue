@@ -1,24 +1,20 @@
 <template>
-  <!-- cpanel layout -->
   <div v-if="isUserLogged">
-    <!-- header -->
-    <header class="container mt-40 mb-40">
-      <div class="row">
+    <app-header />
+    <section class="container mb-30">
+      <div class="row mb-20">
         <div class="col-12">
-          <nav class="nav headerNav">
+          <nav class="nav navigation">
             <nuxt-link to="/cpanel/products" class="nav-link">Товары</nuxt-link>
             <nuxt-link to="/cpanel/users" class="nav-link">Пользователи</nuxt-link>
             <nuxt-link to="/cpanel/orders" class="nav-link">Заказы</nuxt-link>
-            <a class="nav-link pointer" exact @click="logout">Выход</a>
+            <a class="nav-link" exact @click="logout" style="cursor: pointer;">Выход</a>
           </nav>
         </div>
       </div>
-    </header>
-    <!-- //header -->
-    <section class="container mb-40">
       <div class="row">
         <div class="col-12 text-center">
-          <h5 class="mb-0">С возвращением, {{ userAuth.name }} ({{ userAuth.login }})!</h5>
+          <h4 class="mb-0 color-545">Вы вошли как - {{ userAuth.name }} ({{ userAuth.login }}).</h4>
         </div>
       </div>
     </section>
@@ -26,24 +22,24 @@
     <app-footer />
   </div>
   <div v-else>
-    <header class="container access">
+    <section class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
       <div class="row">
         <div class="col-12 text-center">
           <h1 class="mainTitle">У вас недостаточно прав, чтобы видеть это.</h1>
           <nuxt-link to="/" class="btn btn-white-blue mt-80">На главную</nuxt-link>
         </div>
       </div>
-    </header>
-    <app-footer />
+    </section>
   </div>
-  <!-- //cpanel layout -->
 </template>
 
 <script>
+import AppHeader from '~/components/header.vue'
 import AppFooter from '~/components/footer.vue'
 
 export default {
   components: {
+    AppHeader,
     AppFooter,
   },
   data() {
@@ -71,14 +67,3 @@ export default {
   },
 }
 </script>
-
-<style lang="sass" scoped>
-.access
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-
-.pointer
-  cursor: pointer
-</style>

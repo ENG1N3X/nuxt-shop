@@ -48,7 +48,7 @@
 import AppCreateUser from '~/components/cpanel/user/Create'
 
 export default {
-  layout: 'cpanel/cpanel',
+  layout: 'cpanel',
   components: {
     AppCreateUser,
   },

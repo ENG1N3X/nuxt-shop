@@ -14,7 +14,7 @@
 import AppOrder from '~/components/cpanel/order/order'
 
 export default {
-  layout: 'cpanel/cpanel',
+  layout: 'cpanel',
   components: {
     AppOrder,
   },

@@ -1,0 +1,19 @@
+.navigation
+  justify-content: center
+
+  .nav-link
+    font-family: Ubuntu-Medium, sans-serif
+    font-size: rem(15)
+    color: $color-000
+    text-transform: uppercase
+    padding: 0
+    transition: .2s
+
+    &:not(:last-child)
+      margin-right: 25px
+
+    &:hover
+      @extend .is-active
+
+    &.is-active
+      color: $color-883

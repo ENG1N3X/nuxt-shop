@@ -1,5 +1,4 @@
 <template>
-  <!-- login -->
   <section class="container">
     <div class="row mb-30">
       <div class="col-12">
@@ -28,12 +27,11 @@
     </div>
     <notifications group="error" class="error-notify" />
   </section>
-  <!-- //login -->
 </template>
 
 <script>
 export default {
-  layout: 'cpanel/auth',
+  layout: 'empty',
   data() {
     return {
       form: {

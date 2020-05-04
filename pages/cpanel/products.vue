@@ -14,7 +14,7 @@ import AppCreateProduct from '~/components/cpanel/product/Create'
 import AppEditProduct from '~/components/cpanel/product/Edit'
 
 export default {
-  layout: 'cpanel/cpanel',
+  layout: 'cpanel',
   components: {
     AppCreateProduct,
     AppEditProduct,

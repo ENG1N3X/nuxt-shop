@@ -1,5 +1,4 @@
 <template>
-  <!-- error layout -->
   <div>
     <section class="container">
       <div class="row">
@@ -10,7 +9,6 @@
       </div>
     </section>
   </div>
-  <!-- error layout -->
 </template>
 
 <script>
