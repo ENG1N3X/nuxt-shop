@@ -4,6 +4,7 @@
     <app-create-product />
     <app-edit-product />
     <notifications group="success" class="success-notify" />
+    <notifications group="error" class="error-notify" />
   </section>
   <!-- //products -->
 </template>

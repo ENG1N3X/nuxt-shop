@@ -95,42 +95,47 @@ export default {
   },
   methods: {
     async edit(item) {
-      try {
-        const fd = new FormData()
-        fd.append('_id', item._id)
-        fd.append('title', item.title)
-        fd.append('description', item.description)
-        fd.append('count', item.count)
-        fd.append('price', item.price)
+      const fd = new FormData()
+      fd.append('_id', item._id)
+      fd.append('title', item.title)
+      fd.append('description', item.description)
+      fd.append('count', item.count)
+      fd.append('price', item.price)
 
-        if (this.selectedNewImage) {
-          this.$axios.setHeader('Content-Type', 'multipart/form-data')
-          fd.append('image', this.selectedNewImage, this.selectedNewImage.name)
-        }
+      if (this.selectedNewImage) {
+        this.$axios.setHeader('Content-Type', 'multipart/form-data')
+        fd.append('image', this.selectedNewImage, this.selectedNewImage.name)
+      }
 
-        await this.$store.dispatch('cpanel/products/updateProduct', fd)
-
+      const error = await this.$store.dispatch('cpanel/products/updateProduct', fd)
+      console.log(error)
+      if (error) {
+        this.$notify({
+          group: 'error',
+          text: error,
+        })
+      } else {
         this.$notify({
           group: 'success',
           text: 'Товар обновлен',
         })
-
-        this.selectedNewImage = this.selectedImageURL = null
-      } catch (error) {
-        console.error('[PRODUCTS.VUE] Не удалось обновить товар', error)
       }
     },
     async remove(itemId) {
       try {
-        await this.$axios.$delete('/api/product/remove/' + itemId)
-        this.$store.dispatch('cpanel/products/getAllProducts')
-
+        const result = await this.$axios.$delete('/api/product/remove/' + itemId)
         this.$notify({
           group: 'success',
-          text: 'Товар удален из базы',
+          text: result.message,
         })
+
+        await this.$store.dispatch('cpanel/products/getAllProducts')
       } catch (error) {
-        console.error('[PRODUCTS.VUE] Не удалось удалить товар', error)
+        console.error('Не удалось удалить продукт', error)
+        this.$notify({
+          group: 'error',
+          text: 'Не удалось удалить продукт',
+        })
       }
     },
     onFileSelected(event) {

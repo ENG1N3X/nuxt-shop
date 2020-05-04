@@ -11,7 +11,7 @@ export const actions = {
       const users = await this.$axios.$get('/api/user/getall')
       commit('SET_USERS_LIST', users)
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка получения пользователей', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка получения пользователей\n' + '[ИНФО]\n' + error.response.data.message + '\n[КОД]\n' + error)
     }
   },
 
@@ -21,7 +21,8 @@ export const actions = {
       await this.$axios.$put('/api/user/update/' + user._id, user)
       await dispatch('getAllUsers')
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка обновления пользователя', error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка обновления пользователя\n' + '[ИНФО]\n' + error.response.data.message + '\n[КОД]\n' + error)
+      return error.response.data.message
     }
   },
 
@@ -31,7 +32,7 @@ export const actions = {
       await this.$axios.$post('/api/user/create', user)
       await dispatch('getAllUsers')
     } catch (error) {
-      console.error('[ХРАНИЛИЩЕ] Ошибка добавления пользователя\n' + error.response.data.message + '\n' + error)
+      console.error('[ХРАНИЛИЩЕ] Ошибка добавления пользователя\n' + '[ИНФО]\n' + error.response.data.message + '\n[КОД]\n' + error)
       return error.response.data.message
     }
   },

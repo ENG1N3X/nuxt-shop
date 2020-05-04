@@ -60,28 +60,29 @@ export default {
   },
   methods: {
     async create() {
-      try {
-        const fd = new FormData()
-        fd.append('title', this.form.title)
-        fd.append('description', this.form.description)
-        fd.append('count', this.form.count)
-        fd.append('price', this.form.price)
+      const fd = new FormData()
+      fd.append('title', this.form.title)
+      fd.append('description', this.form.description)
+      fd.append('count', this.form.count)
+      fd.append('price', this.form.price)
 
-        if (this.form.image) {
-          this.$axios.setHeader('Content-Type', 'multipart/form-data')
-          fd.append('image', this.form.image, this.form.image.name)
-        }
+      if (this.form.image) {
+        this.$axios.setHeader('Content-Type', 'multipart/form-data')
+        fd.append('image', this.form.image, this.form.image.name)
+      }
 
-        await this.$store.dispatch('cpanel/products/addProduct', fd)
-
+      const error = await this.$store.dispatch('cpanel/products/addProduct', fd)
+      if (error) {
+        this.$notify({
+          group: 'error',
+          text: error,
+        })
+      } else {
         this.$notify({
           group: 'success',
           text: 'Товар добавлен в базу',
         })
-
         this.clearForm()
-      } catch (e) {
-        console.error('Ошибка при создании товара', e)
       }
     },
     clearForm() {

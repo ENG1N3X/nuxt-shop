@@ -59,28 +59,34 @@ export default {
   },
   methods: {
     async edit(item) {
-      try {
-        await this.$store.dispatch('cpanel/users/updateUser', item)
-
+      const error = await this.$store.dispatch('cpanel/users/updateUser', item)
+      if (error) {
+        this.$notify({
+          group: 'error',
+          text: error,
+        })
+      } else {
         this.$notify({
           group: 'success',
           text: 'Пользователь обновлен',
         })
-      } catch (error) {
-        console.error('Не удалось обновить пользователя', error)
       }
     },
     async remove(itemId) {
       try {
-        await this.$axios.$delete('/api/user/remove/' + itemId)
-        this.$store.dispatch('cpanel/users/getAllUsers')
-
+        const result = await this.$axios.$delete('/api/user/remove/' + itemId)
         this.$notify({
           group: 'success',
-          text: 'Пользователь удален',
+          text: result.message,
         })
+
+        await this.$store.dispatch('cpanel/users/getAllUsers')
       } catch (error) {
-        console.error('не удалось удалить пользователя', error)
+        console.error('Не удалось удалить пользователя', error)
+        this.$notify({
+          group: 'error',
+          text: 'Не удалось удалить пользователя',
+        })
       }
     },
   },
