@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <footer class="container mt-80">
-      <div class="row">
-        <div class="col-12">
-          <span class="d-block text-center">{{ copyright }}</span>
-        </div>
+  <footer class="container mt-80">
+    <div class="row">
+      <div class="col-12">
+        <span class="d-block text-center">{{ copyright }}</span>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 </template>
 
 <script>

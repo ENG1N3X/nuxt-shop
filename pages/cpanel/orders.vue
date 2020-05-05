@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import AppOrder from '~/components/cpanel/order/order'
+import AppOrder from '~/components/cpanel/orders'
 
 export default {
   layout: 'cpanel',

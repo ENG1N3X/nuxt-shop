@@ -6,7 +6,7 @@
         <div class="col-12">
           <nav class="nav navigation">
             <nuxt-link to="/cpanel/products" class="nav-link">Товары</nuxt-link>
-            <nuxt-link to="/cpanel/users" class="nav-link">Пользователи</nuxt-link>
+            <nuxt-link to="/cpanel/users" class="nav-link">Администраторы</nuxt-link>
             <nuxt-link to="/cpanel/orders" class="nav-link">Заказы</nuxt-link>
             <a class="nav-link" exact @click="logout" style="cursor: pointer;">Выход</a>
           </nav>

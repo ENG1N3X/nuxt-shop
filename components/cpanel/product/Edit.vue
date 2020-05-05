@@ -1,6 +1,5 @@
 <template>
-  <!-- edit-product -->
-  <div>
+  <section class="container">
     <div v-if="productsComputed != 0" class="row mb-30">
       <div class="col-12">
         <h1 class="mainTitle">Редактировать товар</h1>
@@ -69,8 +68,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- //edit-product -->
+  </section>
 </template>
 
 <script>
@@ -108,7 +106,6 @@ export default {
       }
 
       const error = await this.$store.dispatch('cpanel/products/updateProduct', fd)
-      console.log(error)
       if (error) {
         this.$notify({
           group: 'error',

@@ -1,12 +1,11 @@
 <template>
-  <!-- create-product -->
-  <div>
+  <section class="container">
     <div class="row mb-30">
       <div class="col-12">
         <h1 class="mainTitle">Добавить товар</h1>
       </div>
     </div>
-    <form class="form-row mb-50" @submit.prevent="create">
+    <form class="form-row" @submit.prevent="create">
       <div class="col-4 border d-flex justify-content-center align-items-center">
         <img v-if="selectedImageURL" :src="selectedImageURL" alt="product" />
       </div>
@@ -40,8 +39,7 @@
         </div>
       </div>
     </form>
-  </div>
-  <!-- //create-product -->
+  </section>
 </template>
 
 <script>

@@ -15,8 +15,8 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   try {
-    const userFound = await User.findOne({ login: req.body.login })
-    if (userFound) return res.status(302).json({ message: 'Данный логин уже используется!' })
+    // const userFound = await User.findOne({ login: req.body.login })
+    // if (userFound) return res.status(302).json({ message: 'Данный логин уже используется!' })
     const $set = req.body
     await User.updateOne({ _id: req.params.id }, { $set }, { new: true })
     res.status(200).json({ message: 'Данные пользователя обновленны!' })

@@ -1,12 +1,10 @@
 <template>
-  <!-- products -->
-  <section class="container">
-    <app-create-product />
+  <div>
+    <app-create-product class="mb-30" />
     <app-edit-product />
     <notifications group="success" class="success-notify" />
     <notifications group="error" class="error-notify" />
-  </section>
-  <!-- //products -->
+  </div>
 </template>
 
 <script>
