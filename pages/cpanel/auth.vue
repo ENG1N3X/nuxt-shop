@@ -25,7 +25,6 @@
         </form>
       </div>
     </div>
-    <notifications group="success" class="success-notify" />
     <notifications group="error" class="error-notify" />
   </section>
 </template>
@@ -49,10 +48,6 @@ export default {
           name: response.data.name,
           login: response.data.login,
           logged: this.$auth.loggedIn,
-        })
-        this.$notify({
-          group: 'success',
-          text: 'Успешная авторизация.',
         })
       } catch (error) {
         this.$notify({
