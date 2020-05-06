@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Doc: https://www.npmjs.com/package/cors
-const whiteList = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://api.fondy.eu/api/checkout/url/']
+const whiteList = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://nuxtshop.herokuapp.com']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {

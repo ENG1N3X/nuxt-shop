@@ -25,6 +25,7 @@
         </form>
       </div>
     </div>
+    <notifications group="success" class="success-notify" />
     <notifications group="error" class="error-notify" />
   </section>
 </template>
@@ -49,12 +50,16 @@ export default {
           login: response.data.login,
           logged: this.$auth.loggedIn,
         })
+        this.$notify({
+          group: 'success',
+          text: 'Успешная авторизация.',
+        })
       } catch (error) {
         this.$notify({
           group: 'error',
-          text: error.response.data.message,
+          text: 'Ошибка авторизации.',
         })
-        console.log('[AUTH.VUE] Ошибка метода авторизации\n' + error.response.data.message + '\n' + error)
+        console.log('[AUTH.VUE] Ошибка метода авторизации\n' + error)
       }
     },
   },
