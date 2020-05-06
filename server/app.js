@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors')
 
 // Добавляем роуты
 const productRoutes = require('./routes/product.routs')
@@ -35,6 +36,19 @@ mongoose
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+// Doc: https://www.npmjs.com/package/cors
+const whiteList = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://api.fondy.eu/api/checkout/url/']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+}
+app.use(cors(corsOptions))
 
 // REST API
 app.use('/api/product', productRoutes)
