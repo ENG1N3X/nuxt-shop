@@ -17,7 +17,7 @@
         <button class="btn btn-yellow-white w-100" @click="clearBasket">Очистить</button>
       </div>
       <div class="col-2">
-        <button class="btn btn-green-white w-100">Оплатить</button>
+        <button class="btn btn-green-white w-100" @click="makeOffer">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
         <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in basketComputed" :key="idx">
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+const CloudIpsp = require('cloudipsp-node-js-sdk')
+
 export default {
   computed: {
     // Получаем продукты из store/basket.js
@@ -87,6 +89,28 @@ export default {
         group: 'success',
         text: 'Корзина очищена',
       })
+    },
+    // Тестовая оплата
+    makeOffer() {
+      // https://docs.fondy.eu/en/docs/page/2/
+      const fondy = new CloudIpsp({
+        merchantId: 1446024,
+        secretKey: 'test',
+      })
+      const requestData = {
+        order_id: 'ID1234',
+        order_desc: 'test order',
+        currency: 'USD',
+        amount: '1000',
+      }
+      fondy
+        .Checkout(requestData)
+        .then((data) => {
+          console.log('data', data)
+        })
+        .catch((error) => {
+          console.log('error', error)
+        })
     },
   },
 }
