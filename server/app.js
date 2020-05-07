@@ -38,17 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Doc: https://www.npmjs.com/package/cors
-const whiteList = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://nuxtshop.herokuapp.com', '23.108.217.143', '23.105.225.142', '54.154.216.60', '54.76.178.89']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whiteList.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-}
-app.use(cors(corsOptions))
+app.use(cors())
 
 // REST API
 app.use('/api/product', productRoutes)

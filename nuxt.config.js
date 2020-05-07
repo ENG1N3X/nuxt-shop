@@ -14,7 +14,6 @@ module.exports = {
         content: process.env.npm_package_description || '',
       },
     ],
-    script: [{ src: 'https://api.fondy.eu/static_common/v1/checkout/ipsp.js' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
@@ -56,7 +55,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000' || 'http://127.0.0.1:3000',
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
   },
   /*
    ** Auth configuration
