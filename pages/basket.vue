@@ -94,7 +94,7 @@ export default {
     makeOffer() {
       // https://docs.fondy.eu/en/docs/page/2/
       const fondy = new CloudIpsp({
-        merchantId: 1396424,
+        merchantId: 1446024,
         secretKey: 'test',
         contentType: 'json',
       })

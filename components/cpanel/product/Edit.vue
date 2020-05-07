@@ -1,15 +1,13 @@
 <template>
   <section class="container">
-    <div v-if="productsComputed != 0" class="row mb-30">
+    <div v-if="displayedProducts != 0" class="row mb-30">
       <div class="col-12">
         <h1 class="mainTitle">Редактировать товар</h1>
       </div>
     </div>
     <div class="row align-items-center editProduct" v-for="(product, idx) in displayedProducts" :key="idx">
       <div class="col-6">
-        <h4 class="editProduct__name">
-          {{ product.title }}
-        </h4>
+        <h4 class="editProduct__name">{{ product.title }}</h4>
       </div>
       <div class="col-6">
         <div class="row">
@@ -62,9 +60,13 @@
     <div class="row">
       <div class="col-12 text-center">
         <div class="btn-group">
-          <button type="button" class="btn btn-outline-secondary" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
-          <button type="button" class="btn btn-outline-secondary" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
-          <button type="button" class="btn btn-outline-secondary" v-if="page < pages.length" @click="page++"><i class="fa fa-angle-double-right"></i></button>
+          <button type="button" class="btn btn-outline-success" @click="page--" :disabled="page == 1 ? true : false">
+            <i class="fa fa-angle-double-left"></i>
+          </button>
+          <button type="button" class="btn btn-outline-success" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
+          <button type="button" class="btn btn-outline-success" @click="page++" :disabled="page == pages.length ? true : false">
+            <i class="fa fa-angle-double-right"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -79,15 +81,13 @@ export default {
       selectedNewImage: null,
       selectedImageURL: null,
       page: 1,
-      perPage: 5,
+      perPage: 3,
       pages: [],
     }
   },
   computed: {
-    productsComputed() {
-      return (this.products = JSON.parse(JSON.stringify(this.$store.getters['cpanel/products/productsList'])))
-    },
     displayedProducts() {
+      this.products = JSON.parse(JSON.stringify(this.$store.getters['cpanel/products/productsList']))
       return this.paginate(this.products)
     },
   },
