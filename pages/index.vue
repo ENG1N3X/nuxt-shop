@@ -79,7 +79,7 @@ export default {
         console.log('[INDEX.VUE] Вызван fetch получения продуктов')
       }
     } catch (error) {
-      console.error('[INDEX.VUE] Ошибка получения', error)
+      console.error('[INDEX.VUE] Ошибка fetch получения продуктов\n', error)
     }
   },
 }

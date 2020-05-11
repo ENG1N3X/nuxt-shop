@@ -52,6 +52,7 @@ export default {
   async asyncData({ params, $axios }) {
     try {
       const product = await $axios.get('/api/product/get/' + params.id)
+      console.log('product', product)
       return { product: product.data }
     } catch (e) {
       console.error('e', e)

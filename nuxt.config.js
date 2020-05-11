@@ -1,3 +1,9 @@
+require('dotenv').config()
+const path = require('path')
+const fs = require('fs')
+// import path from 'path'
+// import fs from 'fs'
+
 module.exports = {
   mode: 'universal',
   /*
@@ -47,15 +53,29 @@ module.exports = {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     // Doc: https://auth.nuxtjs.org/
     '@nuxtjs/auth',
   ],
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
+   ** https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    // baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    proxy: true,
+    https: true,
+  },
+  proxy: {
+    '/api/': { target: process.env.BASE_URL || 'https://localhost:3000', pathRewrite: { '^/api/': '/' }, changeOrigin: true },
+  },
+  /*
+   ** Server configuration
+   */
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt')),
+    },
   },
   /*
    ** Auth configuration
@@ -84,6 +104,12 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    extend(config, ctx) {
+      config.node = {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+      }
+    },
   },
 }

@@ -64,7 +64,8 @@
 </template>
 
 <script>
-const CloudIpsp = require('cloudipsp-node-js-sdk')
+// const CloudIpsp = require('cloudipsp-node-js-sdk') // api fondy
+const QiwiBillPaymentsAPI = require('@qiwi/bill-payments-node-js-sdk')
 
 export default {
   computed: {
@@ -91,28 +92,81 @@ export default {
       })
     },
     // Тестовая оплата
-    makeOffer() {
-      // https://docs.fondy.eu/en/docs/page/2/
-      const fondy = new CloudIpsp({
-        merchantId: 1446024,
-        secretKey: 'test',
-        contentType: 'json',
-      })
+    async makeOffer() {
+      try {
+        const SECRET_KEY =
+          'eyJ2ZXJzaW9uIjoiUDJQIiwiZGF0YSI6eyJwYXlpbl9tZXJjaGFudF9zaXRlX3VpZCI6ImpiZWxvOS0wMCIsInVzZXJfaWQiOiI3OTI5MTAxMTAwNiIsInNlY3JldCI6IjdjY2Q5MGI4ZGE3MzJlOWQ0ZjkzMTIzMDhjYzA5MThhMjEyZDgxNTQ4NjY3ZTBjODA3NDc2MWMwODA4YzYzZTUifX0='
+        const PUBLIC_KEY =
+          '48e7qUxn9T7RyYE1MVZswX1FRSbE6iyCj2gCRwwF3Dnh5XrasNTx3BGPiMsyXQFNKQhvukniQG8RTVhYm3iPsXSTd264BRMku72Y6NtHy63xeZwo7oXR2nd6JSaQDe92XsJJF5kBU3g4ZnEW47X5Po9gRmRCcwrYTFtLPyP97jicAZ6jRtX8DAUBT9Mnp'
 
-      const requestData = {
-        order_id: 'ID1234',
-        order_desc: 'test order',
-        currency: 'USD',
-        amount: '1000',
+        const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY)
+        const billId = qiwiApi.generateId()
+        const amount = 1
+        const successUrl = 'http://test.ru/'
+
+        const fields = {
+          amount,
+          currency: 'RUB',
+          expirationDateTime: qiwiApi.getLifetimeByDay(0.5),
+          providerName: 'Test',
+          comment: 'test',
+          phone: '79999999999',
+          email: 'test@test.ru',
+          account: 'user uid on your side',
+          customFields: {
+            city: 'Москва',
+            street: 'Арбат',
+          },
+          successUrl,
+        }
+        console.log('fields', fields)
+
+        const createBillShow = await qiwiApi.createBill(billId, fields) // выставление счета
+        console.log('createBillShow', createBillShow)
+
+        let createPaymentFormShow = qiwiApi.createPaymentForm({
+          PUBLIC_KEY,
+          amount,
+          billId,
+          successUrl,
+        }) // создание формы оплаты
+        console.log('createPaymentFormShow', createPaymentFormShow)
+      } catch (error) {
+        console.error('error', error)
       }
-      fondy
-        .Checkout(requestData)
-        .then((data) => {
-          console.log('data', data)
-        })
-        .catch((error) => {
-          console.log('error', error)
-        })
+
+      // const params = {
+      //   PUBLIC_KEY,
+      //   amount: 200,
+      //   billId: '893794793973',
+      //   successUrl: 'https://merchant.com/payment/success?billId=893794793973',
+      // }
+
+      // const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY)
+      // console.log(qiwiApi)
+      // const link = qiwiApi.createPaymentForm(params)
+      // console.log(link)
+      //
+      // https://docs.fondy.eu/en/docs/page/2/
+      // const fondy = new CloudIpsp({
+      //   merchantId: 1446024,
+      //   secretKey: 'test',
+      //   contentType: 'json',
+      // })
+      // const requestData = {
+      //   order_id: 'ID1234',
+      //   order_desc: 'test order',
+      //   currency: 'USD',
+      //   amount: '1000',
+      // }
+      // fondy
+      //   .Checkout(requestData)
+      //   .then((data) => {
+      //     console.log('data', data)
+      //   })
+      //   .catch((error) => {
+      //     console.log('error', error)
+      //   })
     },
   },
 }
