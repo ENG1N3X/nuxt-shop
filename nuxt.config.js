@@ -66,7 +66,7 @@ module.exports = {
     https: true,
   },
   proxy: {
-    '/api/': { target: process.env.BASE_URL || 'https://localhost:3000', pathRewrite: { '^/api/': '/' }, changeOrigin: true },
+    '/api/': { target: process.env.BASE_URL || 'https://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true },
   },
   /*
    ** Server configuration
