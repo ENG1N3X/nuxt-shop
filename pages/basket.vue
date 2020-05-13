@@ -75,11 +75,11 @@ export default {
     },
     sumProductPrice() {
       // Подсчитываем общую цену за все продукты
-      let productPrice = 0
+      let productsPrice = 0
       this.basketComputed.forEach((product) => {
-        productPrice += parseInt(product.price)
+        productsPrice += parseInt(product.price) * parseInt(product.count)
       })
-      return productPrice
+      return productsPrice
     },
   },
   methods: {
@@ -95,10 +95,10 @@ export default {
     createOrder(amount, order_desc) {
       const params = $ipsp.get('button')
       params.setMerchantId(1446024)
-      params.setAmount(amount, 'USD')
+      params.setAmount(amount, 'RUB', true)
       params.setResponseUrl('http://localhost:3000/pay/?status=success')
       params.setHost('api.fondy.eu')
-      params.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc })
+      params.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc, readonly: true })
       location.href = params.getUrl()
     },
   },
