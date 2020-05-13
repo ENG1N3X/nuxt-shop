@@ -29,7 +29,7 @@
     </div>
     <div v-else class="row">
       <div class="col-12">
-        <p class="text-center choiceStatus">В данный момент нет товаров в магазине</p>
+        <p class="text-center notFound">В данный момент нет товаров в магазине</p>
       </div>
     </div>
   </section>

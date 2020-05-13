@@ -73,13 +73,9 @@ export default {
     basketComputed() {
       return this.$store.getters['basket/basketProducts']
     },
+    // Получаем общую цену за все продукты из store/basket.js
     sumProductPrice() {
-      // Подсчитываем общую цену за все продукты
-      let productsPrice = 0
-      this.basketComputed.forEach((product) => {
-        productsPrice += parseInt(product.price) * parseInt(product.count)
-      })
-      return productsPrice
+      return this.$store.getters['basket/basketProductsPrice']
     },
   },
   methods: {
@@ -93,13 +89,14 @@ export default {
     },
     // Тестовая оплата
     createOrder(amount, order_desc) {
-      const params = $ipsp.get('button')
-      params.setMerchantId(1446024)
-      params.setAmount(amount, 'RUB', true)
-      params.setResponseUrl('http://localhost:3000/pay/?status=success')
-      params.setHost('api.fondy.eu')
-      params.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc, readonly: true })
-      location.href = params.getUrl()
+      const button = $ipsp.get('button')
+      button.setMerchantId(1446024)
+      button.setAmount(amount, 'RUB', true)
+      // button.setResponseUrl('http://localhost:3000/pay') // localhost
+      button.setResponseUrl('https://nuxtshop.herokuapp.com/pay') // herokuapp
+      button.setHost('api.fondy.eu')
+      button.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc, readonly: true })
+      location.href = button.getUrl()
     },
   },
 }

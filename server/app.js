@@ -9,6 +9,7 @@ const cors = require('cors')
 const productRoutes = require('./routes/product.routs')
 const userRoutes = require('./routes/user.routs')
 const authRoutes = require('./routes/auth.routs')
+const orderRoutes = require('./routes/order.routs')
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -44,5 +45,6 @@ app.use(cors())
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/order', orderRoutes)
 
 module.exports = app

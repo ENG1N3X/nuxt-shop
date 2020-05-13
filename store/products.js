@@ -40,7 +40,7 @@ export const actions = {
 }
 
 export const mutations = {
-  // Заполнение state.productList
+  // Заполнение state.productsList
   SET_PRODUCTS_LIST(state, products) {
     state.productsList = products
   },

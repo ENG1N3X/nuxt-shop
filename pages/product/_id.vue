@@ -29,8 +29,8 @@
               <br />
               {{ form.count }} / {{ product.count }}
             </p>
-            <button class="btn btn-danger" @click="form.count--" :disabled="form.count == 1">-</button>
-            <button class="btn btn-success" @click="form.count++" :disabled="form.count == product.count">+</button>
+            <button class="btn btn-danger" @click="form.count--" :disabled="form.count == 1" style="width: 40px; height: 40px;">-</button>
+            <button class="btn btn-success" @click="form.count++" :disabled="form.count == product.count" style="width: 40px; height: 40px;">+</button>
           </div>
         </div>
         <div class="row">
