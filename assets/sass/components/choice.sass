@@ -1,0 +1,24 @@
+.choice
+  display: block
+  text-align: center
+  transition: .2s
+
+  &:hover
+    text-decoration: none
+    transform: scale(0.85)
+
+    button
+      @extend .active
+
+  &Title
+    font-family: Ubuntu-Medium, sans-serif
+    color: $color-000
+    font-size: rem(18)
+    margin:
+      top: 20px
+      bottom: 15px
+
+  &Status
+    font-family: Ubuntu-Light, sans-serif
+    color: $color-000
+    font-size: rem(20)

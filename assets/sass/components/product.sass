@@ -1,0 +1,32 @@
+.product
+    &Title
+        color: $color-883
+        font-size: rem(33)
+        margin-bottom: 0
+
+    &Price, &Count
+        font-family: Ubuntu-Medium, sans-serif
+        font-size: rem(20)
+
+    &Desc
+        font-size: rem(20)
+        margin-bottom: 0
+
+.editProduct
+    background: $color-6f6
+    border-radius: 10px
+    padding: 
+        top: 20px
+        bottom: 20px
+    margin-bottom: 20px
+
+    &__name
+        margin-bottom: 0
+
+    &__block
+        max-height: 0
+        overflow: hidden
+        transition: .3s
+
+        &.active
+            max-height: 500px

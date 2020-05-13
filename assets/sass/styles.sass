@@ -1,0 +1,33 @@
+@import libs
+@import vars
+@import fonts
+@import mixins/font-size
+@import abbreviation
+
+body
+    font-family: $default-font
+    font-size: #{$font-size}px
+    color: $color-000
+    background-color: $color-fff
+
+button, form, input, textarea, a
+    outline: none !important
+    box-shadow: none !important
+
+.mainTitle
+    font-family: Ubuntu-Bold, sans-serif
+    color: $color-000
+    font-size: rem(36)
+    margin-bottom: 0
+
+@import components/header
+@import components/choice
+@import components/product
+@import components/navigation
+
+@import utility/bg
+@import utility/color
+@import utility/button
+@import utility/anim
+@import utility/inputs
+@import utility/notify
