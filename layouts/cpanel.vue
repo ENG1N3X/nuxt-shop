@@ -57,7 +57,7 @@ export default {
   methods: {
     async logout() {
       await this.$auth.logout()
-      this.$store.dispatch('cpanel/authMod/setUserData', {
+      await this.$store.dispatch('cpanel/authMod/setUserData', {
         name: null,
         login: null,
         logged: this.$auth.loggedIn,

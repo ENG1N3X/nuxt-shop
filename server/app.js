@@ -9,6 +9,7 @@ const cors = require('cors')
 const productRoutes = require('./routes/product.routs')
 const userRoutes = require('./routes/user.routs')
 const authRoutes = require('./routes/auth.routs')
+const orderRoutes = require('./routes/order.routs')
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -38,21 +39,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Doc: https://www.npmjs.com/package/cors
-const whiteList = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://nuxtshop.herokuapp.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whiteList.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-}
-app.use(cors(corsOptions))
+app.use(cors())
 
 // REST API
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/order', orderRoutes)
 
 module.exports = app

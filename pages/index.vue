@@ -6,7 +6,7 @@
         <h2 class="mainTitle">Товары</h2>
       </div>
     </div>
-    <div v-if="productsComputed != 0" class="row justify-content-center">
+    <div v-if="displayedProducts != 0" class="row justify-content-center">
       <div class="col-4 mb-40" v-for="(product, idx) in displayedProducts" :key="idx">
         <nuxt-link :to="`/product/${product._id}`" class="choice">
           <img class="img-fluid" :src="product.image" :alt="product.title" />
@@ -17,15 +17,19 @@
       </div>
       <div class="col-12 text-center">
         <div class="btn-group">
-          <button type="button" class="btn btn-outline-dark" v-if="page != 1" @click="page--"><i class="fa fa-angle-double-left"></i></button>
-          <button type="button" class="btn btn-outline-secondary" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
-          <button type="button" class="btn btn-outline-secondary" v-if="page < pages.length" @click="page++"><i class="fa fa-angle-double-right"></i></button>
+          <button type="button" class="btn btn-outline-success" @click="page--" :disabled="page == 1 ? true : false">
+            <i class="fa fa-angle-double-left"></i>
+          </button>
+          <button type="button" class="btn btn-outline-success" v-for="(pageNumber, idx) in pages.slice(page - 1, page + 1)" :key="idx" @click="page = pageNumber">{{ pageNumber }}</button>
+          <button type="button" class="btn btn-outline-success" @click="page++" :disabled="page == pages.length ? true : false">
+            <i class="fa fa-angle-double-right"></i>
+          </button>
         </div>
       </div>
     </div>
     <div v-else class="row">
       <div class="col-12">
-        <p class="text-center choiceStatus">В данный момент нет товаров в магазине</p>
+        <p class="text-center notFound">В данный момент нет товаров в магазине</p>
       </div>
     </div>
   </section>
@@ -43,11 +47,8 @@ export default {
     }
   },
   computed: {
-    productsComputed() {
-      this.products = this.$store.getters['cpanel/products/productsList']
-      return this.products
-    },
     displayedProducts() {
+      this.products = this.$store.getters['products/productsList']
       return this.paginate(this.products)
     },
   },
@@ -73,12 +74,12 @@ export default {
   },
   async fetch({ store }) {
     try {
-      if (store.getters['cpanel/products/productsList'].length === 0) {
-        await store.dispatch('cpanel/products/getAllProducts')
+      if (store.getters['products/productsList'].length === 0) {
+        await store.dispatch('products/getAllProducts')
         console.log('[INDEX.VUE] Вызван fetch получения продуктов')
       }
     } catch (error) {
-      console.error('[INDEX.VUE] Ошибка получения', error)
+      console.error('[INDEX.VUE] Ошибка fetch получения продуктов\n', error)
     }
   },
 }

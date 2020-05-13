@@ -69,7 +69,7 @@ export default {
         fd.append('image', this.form.image, this.form.image.name)
       }
 
-      const error = await this.$store.dispatch('cpanel/products/addProduct', fd)
+      const error = await this.$store.dispatch('products/addProduct', fd)
       if (error) {
         this.$notify({
           group: 'error',

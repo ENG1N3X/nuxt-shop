@@ -19,15 +19,18 @@
         <div class="row">
           <div class="col-6">
             <p class="productPrice">
-              Цена:<br />
+              Цена за штуку:<br />
               {{ product.price }}
             </p>
           </div>
           <div class="col-6">
             <p class="productCount">
-              Количество:<br />
-              {{ product.count }}
+              Выбрано / Всего:
+              <br />
+              {{ form.count }} / {{ product.count }}
             </p>
+            <button class="btn btn-danger" @click="form.count--" :disabled="form.count == 1" style="width: 40px; height: 40px;">-</button>
+            <button class="btn btn-success" @click="form.count++" :disabled="form.count == product.count" style="width: 40px; height: 40px;">+</button>
           </div>
         </div>
         <div class="row">
@@ -49,18 +52,27 @@
 
 <script>
 export default {
+  data() {
+    return {
+      form: {
+        count: 1,
+      },
+    }
+  },
   async asyncData({ params, $axios }) {
     try {
       const product = await $axios.get('/api/product/get/' + params.id)
       return { product: product.data }
-    } catch (e) {
-      console.error('e', e)
+    } catch (error) {
+      console.error('error\n', error)
     }
   },
   methods: {
     // Метод для отправки продукта в store/basket.js
     addToBasket(item) {
-      this.$store.commit('basket/add', item)
+      let request = Object.assign({}, item)
+      request.count = this.form.count
+      this.$store.commit('basket/add', request)
       this.$notify({
         group: 'success',
         text: 'Товар добавлен в корзину',

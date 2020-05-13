@@ -17,7 +17,7 @@
         <button class="btn btn-yellow-white w-100" @click="clearBasket">Очистить</button>
       </div>
       <div class="col-2">
-        <button class="btn btn-green-white w-100" @click="makeOffer">Оплатить</button>
+        <button type="submit" class="btn btn-green-white w-100" @click="createOrder(sumProductPrice, 'Заказ #444')">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
         <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in basketComputed" :key="idx">
@@ -64,21 +64,18 @@
 </template>
 
 <script>
-const CloudIpsp = require('cloudipsp-node-js-sdk')
-
 export default {
+  head: {
+    script: [{ src: 'https://api.fondy.eu/static_common/v1/checkout/ipsp.js' }],
+  },
   computed: {
     // Получаем продукты из store/basket.js
     basketComputed() {
       return this.$store.getters['basket/basketProducts']
     },
+    // Получаем общую цену за все продукты из store/basket.js
     sumProductPrice() {
-      // Подсчитываем общую цену за все продукты
-      let productPrice = 0
-      this.basketComputed.forEach((product) => {
-        productPrice += parseInt(product.price)
-      })
-      return productPrice
+      return this.$store.getters['basket/basketProductsPrice']
     },
   },
   methods: {
@@ -91,26 +88,15 @@ export default {
       })
     },
     // Тестовая оплата
-    makeOffer() {
-      // https://docs.fondy.eu/en/docs/page/2/
-      const fondy = new CloudIpsp({
-        merchantId: 1446024,
-        secretKey: 'test',
-      })
-      const requestData = {
-        order_id: 'ID1234',
-        order_desc: 'test order',
-        currency: 'USD',
-        amount: '1000',
-      }
-      fondy
-        .Checkout(requestData)
-        .then((data) => {
-          console.log('data', data)
-        })
-        .catch((error) => {
-          console.log('error', error)
-        })
+    createOrder(amount, order_desc) {
+      const button = $ipsp.get('button')
+      button.setMerchantId(1446024)
+      button.setAmount(amount, 'RUB', true)
+      // button.setResponseUrl('http://localhost:3000/pay') // localhost
+      button.setResponseUrl('https://nuxtshop.herokuapp.com/pay') // herokuapp
+      button.setHost('api.fondy.eu')
+      button.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc, readonly: true })
+      location.href = button.getUrl()
     },
   },
 }

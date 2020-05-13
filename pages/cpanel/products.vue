@@ -21,8 +21,8 @@ export default {
   // Обновляем хранилище
   async fetch({ store }) {
     try {
-      if (store.getters['cpanel/products/productsList'].length === 0) {
-        await store.dispatch('cpanel/products/getAllProducts')
+      if (store.getters['products/productsList'].length === 0) {
+        await store.dispatch('products/getAllProducts')
         console.log('[PRODUCTS.VUE] Вызван fetch получения продуктов')
       }
     } catch (error) {

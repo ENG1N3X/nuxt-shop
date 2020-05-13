@@ -2,17 +2,21 @@
 
 export const state = () => ({
   basketProducts: [], // Продукты в корзине
+  basketProductsPrice: 0, // Общая цена продуктов
 })
 
 export const mutations = {
   // Добавляем в массив элементы
   add(state, item) {
     state.basketProducts.push(item)
-    console.log('[ХРАНИЛИЩЕ] Добавлен продукт в корзину', item)
+    state.basketProductsPrice += item.price * item.count
+
+    console.log('[ХРАНИЛИЩЕ] Добавлен продукт в корзину ' + item.title + '(' + item._id + ')' + ', общая сумма продуктов: ' + state.basketProductsPrice)
   },
   // Очищаем массив
   clear(state) {
     state.basketProducts = []
+    state.basketProductsPrice = 0
     console.log('[ХРАНИЛИЩЕ] Корзина очищена')
   },
 }
@@ -20,4 +24,5 @@ export const mutations = {
 export const getters = {
   // Кэширование и возврат для вызова в ***.vue
   basketProducts: (state) => state.basketProducts,
+  basketProductsPrice: (state) => state.basketProductsPrice,
 }
