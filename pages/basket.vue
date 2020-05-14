@@ -96,7 +96,7 @@ export default {
       button.setMerchantId(1446024)
       button.setAmount(amount, 'RUB', true)
       // button.setResponseUrl(`http://localhost:3000/success?result=success&order=${order}`) // localhost
-      button.setResponseUrl(`http://localhost:3000/success?result=success&order=${order}`) // herokuapp
+      button.setResponseUrl(`https://nuxtshop.herokuapp.com/success?result=success&order=${order}`) // herokuapp
       button.setHost('api.fondy.eu')
       button.addField({ label: 'Заказ', name: 'order', value: order, readonly: true })
       location.href = button.getUrl()
