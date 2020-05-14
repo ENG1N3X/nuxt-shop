@@ -1,31 +1,26 @@
 const { model, Schema } = require('mongoose')
 
 const orderSchema = new Schema({
-  title: {
+  order: {
     type: String,
-    required: true,
-    index: true,
+    require: true,
   },
-  description: {
+  list: {
     type: String,
-    required: true,
-  },
-  count: {
-    type: Number,
-    required: true,
+    require: true,
   },
   total: {
     type: Number,
     index: true,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
   date: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
+    default: 'Не оплачен',
   },
 })
 

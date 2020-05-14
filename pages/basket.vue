@@ -17,7 +17,7 @@
         <button class="btn btn-yellow-white w-100" @click="clearBasket">Очистить</button>
       </div>
       <div class="col-2">
-        <button type="submit" class="btn btn-green-white w-100" @click="createOrder(sumProductPrice, 'Заказ #444')">Оплатить</button>
+        <button type="submit" class="btn btn-green-white w-100" @click="createOrder(sumProductPrice)">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
         <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in basketComputed" :key="idx">
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+const moment = require('moment')
+
 export default {
   head: {
     script: [{ src: 'https://api.fondy.eu/static_common/v1/checkout/ipsp.js' }],
@@ -88,15 +90,33 @@ export default {
       })
     },
     // Тестовая оплата
-    createOrder(amount, order_desc) {
+    createOrder(amount) {
+      const order = this.getOrderNumber()
       const button = $ipsp.get('button')
       button.setMerchantId(1446024)
       button.setAmount(amount, 'RUB', true)
-      // button.setResponseUrl('http://localhost:3000/pay') // localhost
-      button.setResponseUrl('https://nuxtshop.herokuapp.com/pay') // herokuapp
+      // button.setResponseUrl(`http://localhost:3000/success?result=success&order=${order}`) // localhost
+      button.setResponseUrl(`http://localhost:3000/success?result=success&order=${order}`) // herokuapp
       button.setHost('api.fondy.eu')
-      button.addField({ label: 'Описание покупки', name: 'order_desc', value: order_desc, readonly: true })
+      button.addField({ label: 'Заказ', name: 'order', value: order, readonly: true })
       location.href = button.getUrl()
+
+      if (location.href) {
+        this.create(order, amount, this.basketComputed)
+      }
+
+      // this.create(order, amount, this.basketComputed)
+    },
+    getOrderNumber() {
+      return moment().format('YYYYMMDDHHmmss').toString()
+    },
+    async create(order, total, list) {
+      const fd = new FormData()
+      fd.append('order', order)
+      fd.append('list', JSON.stringify(list))
+      fd.append('total', total)
+      fd.append('date', moment().format('YYYY-MM-DD-HH-mm-ss').toString())
+      await this.$store.dispatch('cpanel/orders/addOrder', fd)
     },
   },
 }
