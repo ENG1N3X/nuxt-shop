@@ -19,7 +19,7 @@ export const actions = {
   // Обновление заказа
   async updateOrder({ dispatch }, order) {
     try {
-      await this.$axios.$put('/api/order/update/' + order.get('_id'), order)
+      await this.$axios.$put('/api/order/update/' + order.get('order'), order)
       await dispatch('getAllOrders')
     } catch (error) {
       console.error('[ХРАНИЛИЩЕ] Ошибка обновления заказа\n' + '[ИНФО]\n' + error.response.data.message + '\n[КОД]\n' + error)

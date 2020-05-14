@@ -17,7 +17,15 @@ export const mutations = {
   clear(state) {
     state.basketProducts = []
     state.basketProductsPrice = 0
+    localStorage.removeItem('basketProducts')
+    localStorage.removeItem('basketProductsPrice')
     console.log('[ХРАНИЛИЩЕ] Корзина очищена')
+  },
+  // Грузим корзину из cookies
+  loadBasket(state) {
+    // console.log(state.basketProducts)
+    // console.log(state.basketProductsPrice)
+    console.log('[ХРАНИЛИЩЕ] Загружено cookies корзины')
   },
 }
 

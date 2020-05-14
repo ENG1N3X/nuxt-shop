@@ -11,7 +11,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   try {
-    await Order.updateOne({ _id: req.params.id }, req.body, { new: true })
+    await Order.updateOne({ order: req.params.id }, req.body, { new: true })
     res.json({ message: 'Данные обновленны!' })
   } catch (error) {
     res.status(500).json({ message: 'Не удалось обновить данные!', error })
