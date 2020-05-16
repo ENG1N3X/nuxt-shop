@@ -16,11 +16,11 @@
             <label>Пароль</label>
             <input type="text" class="form-control" v-model="form.password" placeholder="Введите пароль" required />
           </div>
-          <div class="form-group col-4">
-            <button type="submit" class="btn btn-white-blue">Вход</button>
-          </div>
           <div class="form-group col-4 text-right">
             <nuxt-link to="/" class="btn btn-white-blue">Выход</nuxt-link>
+          </div>
+          <div class="form-group col-4">
+            <button type="submit" class="btn btn-white-blue">Вход</button>
           </div>
         </form>
       </div>
