@@ -1,5 +1,5 @@
 <template>
-  <!-- success -->
+  <!-- status -->
   <section v-if="(urlParams.result == 'success')" class="container">
     <div class="row">
       <div class="col-12">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </section>
-  <!-- //success -->
+  <!-- //status -->
 </template>
 
 <script>
@@ -35,15 +35,14 @@ export default {
   methods: {
     getUrlParams() {
       const url = window.location.search
-      var arrayVar = [] // массив для хранения переменных
-      var valueAndKey = [] // массив для временного хранения значения и имени переменной
-      var resultArray = [] // массив для хранения переменных
-      arrayVar = url.substr(1).split('&') // разбираем урл на параметры
-      if (arrayVar[0] == '') return false // если нет переменных в урле
+      let arrayVar = []
+      let valueAndKey = []
+      let resultArray = []
+      arrayVar = url.substr(1).split('&')
+      if (arrayVar[0] == '') return false
       for (let i = 0; i < arrayVar.length; i++) {
-        // перебираем все переменные из урла
-        valueAndKey = arrayVar[i].split('=') // пишем в массив имя переменной и ее значение
-        resultArray[valueAndKey[0]] = valueAndKey[1] // пишем в итоговый массив имя переменной и ее значение
+        valueAndKey = arrayVar[i].split('=')
+        resultArray[valueAndKey[0]] = valueAndKey[1]
       }
       return resultArray
     },

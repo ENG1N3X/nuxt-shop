@@ -10,14 +10,14 @@
       <div class="col-8">
         <h3 class="d-flex">
           Итого:
-          <div class="pl-10 color-545">{{ sumProductPrice }} рублей</div>
+          <div class="pl-10 color-545">{{ basketProductsTotal }} рублей</div>
         </h3>
       </div>
       <div class="col-2">
         <button class="btn btn-yellow-white w-100" @click="clearBasket">Очистить</button>
       </div>
       <div class="col-2">
-        <button type="submit" class="btn btn-green-white w-100" @click="createOrder(sumProductPrice)">Оплатить</button>
+        <button type="submit" class="btn btn-green-white w-100" @click="createOrder(basketProductsTotal)">Оплатить</button>
       </div>
       <div class="col-12 mt-30">
         <div class="row mb-30 pt-2 pb-2 bg-6f6 rounded mb-20" v-for="(product, idx) in basketComputed" :key="idx">
@@ -76,8 +76,8 @@ export default {
       return this.$store.getters['basket/basketProducts']
     },
     // Получаем общую цену за все продукты из store/basket.js
-    sumProductPrice() {
-      return this.$store.getters['basket/basketProductsPrice']
+    basketProductsTotal() {
+      return this.$store.getters['basket/basketProductsTotal']
     },
   },
   methods: {
@@ -91,12 +91,12 @@ export default {
     },
     // Тестовая оплата
     createOrder(amount) {
-      const order = this.getOrderNumber()
+      const order = moment().format('YYYYMMDDHHmmss').toString()
       const button = $ipsp.get('button')
       button.setMerchantId(1446024)
       button.setAmount(amount, 'RUB', true)
-      // button.setResponseUrl(`http://localhost:3000/success?result=success&order=${order}`) // localhost
-      button.setResponseUrl(`https://nuxtshop.herokuapp.com/success?result=success&order=${order}`) // herokuapp
+      // button.setResponseUrl(`http://localhost:3000/status?result=success&order=${order}`) // localhost
+      button.setResponseUrl(`https://nuxtshop.herokuapp.com/status?result=success&order=${order}`) // herokuapp
       button.setHost('api.fondy.eu')
       button.addField({ label: 'Заказ', name: 'order', value: order, readonly: true })
       location.href = button.getUrl()
@@ -106,9 +106,6 @@ export default {
       }
 
       // this.create(order, amount, this.basketComputed)
-    },
-    getOrderNumber() {
-      return moment().format('YYYYMMDDHHmmss').toString()
     },
     async create(order, total, list) {
       const fd = new FormData()
